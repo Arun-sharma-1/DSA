@@ -49,6 +49,8 @@
      {
          root=nullptr;
      }
+
+     // we are creating these coz we don't have access to root 
      void inorder()
      {  if(root==nullptr)
         {
@@ -71,25 +73,7 @@
             postorder_transversal(root );
       }
 
-    //   void inorder_itr(Node *root)
-    //   {
-    //       stack<Node *>stk;
-    //       Node *p=root;
-    //       while(!stk.empty() || p!=nullptr)
-    //       {
-    //           while(p!=nullptr)
-    //           {
-    //               stk.push(p);
-    //               p=p->left;
-    //           }
-            
-    //         p=stk.top();
-    //         stk.pop();
-
-    //         cout<<p->data<<" ";
-    //         p=p->right;
-    //       }
-    //   }
+ 
      void preorder()
      {
           if(root==nullptr)
@@ -131,7 +115,7 @@
  
 
     //  RECURSION-2
-     Node *insert_ele1(Node *root,int ele)
+     Node *insert_ele_rec(Node *root,int ele)
      {
          if(root==nullptr)
          {
@@ -139,16 +123,16 @@
          }
          if(ele<=root->data)
          {
-             root->left=insert_ele1(root->left,ele); // connection nodes with each other
+             root->left=insert_ele_rec(root->left,ele); // connection nodes with each other
 
-         }else root->right=insert_ele1(root->right,ele);// connection nodes with each other
+         }else root->right=insert_ele_rec(root->right,ele);// connection nodes with each other
 
-         return root;
+         return root; // in this step we got root of tree(top most ele in tree)
      }
 
      void insert(int ele)
      {
-         root=insert_ele1(root,ele);
+        root=insert_ele_rec(root,ele);
      }
  
  
@@ -202,8 +186,6 @@
      }
 
      }
-
-   
  };
  int main()
  {
