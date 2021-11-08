@@ -83,33 +83,6 @@ public:
         preorder_transversal(root);
     }
 
-    // RECURSION-1 // not working
-    //  void insertele(Node *root, int ele)
-    //  {
-    //     if(root==nullptr)
-    //     {
-    //         root=new Node(ele);
-    //         return;
-    //     }
-    //  if(ele<=root->data)
-    //  {
-    //      if(root->left==nullptr)
-    //      {
-    //          root->left=new Node(ele);
-    //      }else insertele(root->left,ele);
-    //  }
-    //  else{
-    //      if(root->right==nullptr)
-    //      {
-    //          root->right=new Node(ele);
-    //      }else insertele(root->right,ele);
-    //  }
-    //  }
-    //  void insert(int ele)
-    //  {
-    //      insertele(root,ele);
-    //  }
-
     //  RECURSION-2
     Node *insert_ele_rec(Node *root, int ele)
     {
