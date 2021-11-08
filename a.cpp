@@ -48,6 +48,43 @@ public:
     {
         root = nullptr;
     }
+    bool search(Node *root , int ele)
+    {
+       
+        if(root==nullptr) return false; 
+        
+        if(ele == root->data) return true;
+        if(ele < root->data) return search(root->left ,ele);
+        else if(ele > root->data) return search(root->right ,ele);
+        
+    }
+    bool search_itr(Node *root , int ele )
+    {
+        
+        while(root!=nullptr)
+        {
+            if(ele == root->data) return true;
+            if(ele < root->data) 
+            {
+                root=root->left;
+            }
+            else root=root->right;
+        }
+        return false;
+    }
+    void search_ele(int ele)
+    {
+        if(root==nullptr)
+        {
+            cout<<"Tree is empty ";
+            return;
+        }
+        if(search_itr(root ,ele)) 
+        {
+            cout<<"Ele is present ";
+        }
+        else cout<<"ele is not present";
+    }
     Node *insert_ele(Node *root , int ele)
     {
         if(root==nullptr)
@@ -58,11 +95,12 @@ public:
 
         
     }
+
     void insert(int ele)
     {
         root=insert_ele(root, ele);
     }
-    bool ispresent(Node *root) {}
+
 
     void inorder()
     {
@@ -87,4 +125,6 @@ int main()
         tree.insert(ele);
     }
     tree.inorder();
+    cout<<endl;
+    tree.search_ele(1);
 }
