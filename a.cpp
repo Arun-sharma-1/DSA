@@ -3,178 +3,269 @@ using namespace std;
 class Node
 {
 public:
-    int data;
     Node *left;
     Node *right;
+    int data;
     Node(int ele)
     {
         data = ele;
         left = right = nullptr;
     }
 };
-
-class BST
+void preorder(Node *root)
 {
-    Node *root;
-    void inorder_transversal(Node *root)
+    if (root == nullptr)
+        return;
+    cout << root->data << " ";
+    preorder(root->left);
+    preorder(root->right);
+}
+void preorder_iter(Node *root)
+{
+    Node *p = root;
+    stack<Node *> s;
+
+    while (p != nullptr || !s.empty())
     {
-        if (root == nullptr)
-            return;
-        inorder_transversal(root->left);
+        while (p != nullptr)
+        {
+            s.push(p);
+            cout << p->data << " ";
+            p = p->left;
+        }
+        p = s.top();
+        s.pop();
+        p = p->right;
+    }
+}
+void inorder(Node *root)
+{
+    if (root == nullptr)
+        return;
+    inorder(root->left);
+    cout << root->data << " ";
+    inorder(root->right);
+}
+void inorder_iter(Node *root)
+{
+    Node *p = root;
+    stack<Node *> stk;
+    while (p != nullptr || !stk.empty())
+    {
+        while (p != nullptr)
+        {
+            stk.push(p);
+            p = p->left;
+        }
+        p = stk.top();
+        cout << p->data << " ";
+        stk.pop();
+        p = p->right;
+    }
+}
+void postorder(Node *root)
+{
+    if (root == nullptr)
+        return;
+    postorder(root->left);
+    postorder(root->right);
+    cout << root->data << " ";
+}
+void postorder_iter(Node *root)
+{
+    Node *p = root;
+    stack<Node *> s;
+    while (p != nullptr || !s.empty())
+    {
+        while (p != nullptr)
+        {
+            p = p->left;
+            s.push(p);
+        }
+        p = s.top();
+        while (p != nullptr)
+        {
+            p = p->right;
+            s.push(p);
+        }
+        p = s.top();
+        s.pop();
+        cout << p->data << " ";
+    }
+}
+void level_order(Node *root)
+{
+    if (root == nullptr)
+        return;
+    queue<Node *> q;
+    q.push(root);
+
+    while (!q.empty())
+    {
+        int size = q.size();
+        for (int i = 0; i < size; i++)
+        {
+            Node *curr = q.front();
+            q.pop();
+
+            cout << curr->data << " ";
+
+            if (curr->left)
+                q.push(curr->left);
+            if (curr->right)
+                q.push(curr->right);
+        }
+    }
+}
+int count_nodes(Node *root)
+{
+    if (root == nullptr)
+        return 0;
+    int x = count_nodes(root->left);
+    int y = count_nodes(root->right);
+    return x + y + 1;
+}
+int sum_nodes(Node *root)
+{
+    if (root == nullptr)
+        return 0;
+    int x = sum_nodes(root->left);
+    int y = sum_nodes(root->right);
+    return x + y + root->data;
+}
+int height(Node *root)
+{
+    int x, y;
+    if (root == nullptr)
+        return 0;
+    x = height(root->left);
+    y = height(root->right);
+    if (x > y)
+        return x + 1;
+    else
+        return y + 1;
+}
+int Nodes_with_0degree(Node *root)
+{
+    int x, y;
+    if (root == nullptr)
+        return 0;
+    x = Nodes_with_0degree(root->left);
+    y = Nodes_with_0degree(root->right);
+    if (!root->left && !root->right)
+        return x + y + 1;
+    else
+        return x + y;
+}
+void print(Node *root, int k)
+{
+    if (root == nullptr)
+        return;
+    if (k == 0)
         cout << root->data << " ";
-        inorder_transversal(root->right);
-    }
-    void preorder_transversal(Node *root)
+    else
     {
-
-        if (root == nullptr)
-            return;
-        cout << root->data << " ";
-        preorder_transversal(root->left);
-        preorder_transversal(root->right);
+        print(root->left, k - 1);
+        print(root->right, k - 1);
     }
+}
+int max_value(Node *root)
+{
+    if (root == nullptr)
+        return 0;
+    int x = max_value(root->left);
+    int y = max_value(root->right);
 
-    void postorder_transversal(Node *root)
+    return max(root->data, max(x, y));
+}
+void left_view(Node *root)
+{
+    queue<Node *> q;
+    q.push(root);
+
+    while (!q.empty())
     {
-        if (root == nullptr)
-            return;
-        postorder_transversal(root->left);
-        postorder_transversal(root->right);
-        cout << root->data << " ";
-    }
-
-public:
-    BST()
-    {
-        root = nullptr;
-    }
-    bool search(Node *root, int ele)
-    {
-
-        if (root == nullptr)
-            return false;
-
-        if (ele == root->data)
-            return true;
-        if (ele < root->data)
-            return search(root->left, ele);
-        else if (ele > root->data)
-            return search(root->right, ele);
-    }
-    bool search_itr(Node *root, int ele)
-    {
-
-        while (root != nullptr)
+        int size = q.size();
+        for (int i = 0; i < size; i++)
         {
-            if (ele == root->data)
-                return true;
-            if (ele < root->data)
-            {
-                root = root->left;
-            }
-            else
-                root = root->right;
-        }
-        return false;
-    }
-    void search_ele(int ele)
-    {
-        if (root == nullptr)
-        {
-            cout << "Tree is empty ";
-            return;
-        }
-        if (search_itr(root, ele))
-        {
-            cout << "Ele is present ";
-        }
-        else
-            cout << "ele is not present";
-    }
-    Node *insert_ele(Node *root, int ele)
-    {
-        if (root == nullptr)
-            return new Node(ele);
-        if (ele <= root->data)
-            root->left = insert_ele(root->left, ele);
-        else
-            root->right = insert_ele(root->right, ele);
-    }
-
-    void insert(int ele)
-    {
-        root = insert_ele(root, ele);
-    }
-
-    Node *getsuccessor(Node *root )
-    {
-        root=root->right;
-        while(root!= nullptr && root->left != nullptr)
-            root=root->left;
-        return root;
-    }
-    Node *delele(Node *root, int ele)
-    {
-        if (root == nullptr)
-            return root;
-        if (ele < root->data)
-            root->left = delele(root->left, ele);
-        else if (ele > root->data)
-            root->right = delele(root->right, ele);
-        else
-        {
-            if (root->left == nullptr)
-            {
-                Node *temp = root->right;
-                free(root);
-                return temp;
-            }
-            else if (root->right == nullptr)
-            {
-                Node *temp = root->left;
-                free(root);
-                return temp;
-            }
-            else
-            {
-                Node *succ = getsuccessor(root);
-                root->data = succ->data;
-                root->right = delele(root->right ,succ->data);
-    
-            }
-            return root;
+            Node *curr = q.front();
+            q.pop();
+            if (i == 0)
+                cout << curr->data << " ";
+            if (curr->left)
+                q.push(curr->left);
+            if (curr->right)
+                q.push(curr->right);
         }
     }
+}
 
-    void delete_node(int ele)
+bool children_sum(Node *root)
+{
+    int sum = 0;
+    if (root == nullptr)
+        return true;
+    if (root->left == nullptr && root->right == nullptr)
+        return true;
+    if (root->left)
+        sum += root->left->data;
+    if (root->right)
+        sum += root->right->data;
+    return (root->data && children_sum(root->left) && children_sum(root->right));
+}
+int max_width(Node *root)
+{
+    int res = 0;
+    if (root == nullptr)
+        return 0;
+    queue<Node *> q;
+    q.push(root);
+    while (!q.empty())
     {
-        root = delele(root, ele);
-    }
+        int size = q.size();
+        res = max(res, size);
+        cout<< res<<" ";
+         
+        for (int i = 0; i < size; i++)
+        {
+            Node *curr = q.front();
+            q.pop();
 
-    void inorder()
-    {
-        inorder_transversal(root);
+            if (curr->left)
+                q.push(curr->left);
+            if (curr->right)
+                q.push(curr->right);
+        }
     }
-    void postorder()
-    {
-        postorder_transversal(root);
-    }
-    void preorder()
-    {
-        preorder_transversal(root);
-    }
-};
-
+//    cout<< res;
+}
 int main()
 {
-    BST tree;
-    vector<int> arr = {12, 423, 1, 34, 2, 5, 9, 90, 3};
-    for (auto ele : arr)
-    {
-        tree.insert(ele);
-    }
-    tree.inorder();
-    cout << endl;
-    tree.delete_node(12);
-    tree.inorder();
+    Node *root = new Node(1);
+    root->left = new Node(2);
+    root->left->left = new Node(11);
+
+    root->right = new Node(3);
+    root->right->left = new Node(4);
+    root->right->left->left = new Node(10);
+    root->right->right = new Node(5);
+
+    root->right->right->left = new Node(6);
+    root->right->right->left->left = new Node(8);
+    root->right->right->left->right = new Node(9);
+
+    root->right->right->right = new Node(7);
+
+    max_width(root);
+    // cout << "Preorder: ";
+    // preorder(root);
+    // cout << endl;
+    // cout << "Inorder: ";
+    // inorder_iter(root);
+    // cout << endl;
+    // cout << "preorder:";
+    // postorder(root);
+    // cout << endl;
+    // cout << "Level Order: ";
+    // level_order(root);
 }
