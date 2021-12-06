@@ -1,38 +1,33 @@
 #include <bits/stdc++.h>
 using namespace std;
-void DFS(int src, unordered_map<int, bool> &visited, unordered_map<int, vector<int>> &adj)
-{
-    cout << src << " ";
-    visited[src] = true;
-
-    for (auto child : adj[src])
-    {
-        if (!visited[child])
-        {
-            DFS(child, visited, adj);
-        }
-    }
-}
-void BFS(unordered_map<int, bool>visited, unordered_map<int, vector<int>> &adj)
+void Shortest_path(int src, unordered_map<int, bool> &visited, unordered_map<int, vector<int>> &adj)
 {
     queue<int> nodes;
-    nodes.push(1);
-    visited[1] = true;
+    nodes.push(src);
+
+    vector<int> result(7, 0);
+    result[src] = 0;
+    visited[src] = true;
 
     while (!nodes.empty())
     {
         int curr = nodes.front();
-        cout << curr << " ";
         nodes.pop();
 
         for (auto child : adj[curr])
         {
             if (!visited[child])
             {
+                result[child] = result[curr] + 1;
                 nodes.push(child);
                 visited[child] = true;
             }
         }
+    }
+
+    for (int ele = src; ele < result.size(); ele++)
+    {
+        cout << result[ele] << " ";
     }
 }
 int main()
@@ -45,8 +40,5 @@ int main()
         adj[edge[0]].push_back(edge[1]);
         adj[edge[1]].push_back(edge[0]);
     }
-    // DFS(1, visited, adj);
-    // cout << endl;
-    BFS(visited,adj);
-    return 0;
+    Shortest_path(1, visited, adj);
 }
