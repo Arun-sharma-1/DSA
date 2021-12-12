@@ -38,15 +38,9 @@ int main()
        cout<<ele<<" is not present ";
    }
 
-
-    // map<int,bool>h;
-    // h.insert(4100);
-    //    h[4041] = true;
-    //    if(h.find(4040)==h.end())
-    //    {
-    //         cout<<"ele is not present ";
- 
-    //    }
-    // else cout<<"ele is present ";
-
+    // Hash h(1,10);
+    // h.insert(40);
+    // h.insert(41);
+    // h.insert(42); #COLLISION CONDITION
+    // h.insert(52);
 }

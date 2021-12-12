@@ -1,52 +1,46 @@
 #include <bits/stdc++.h>
 using namespace std;
-void DFS(int src, unordered_map<int, bool> &visited, unordered_map<int, vector<int>> &adj)
+class Hash
 {
-    cout << src << " ";
-    visited[src] = true;
-
-    for (auto child : adj[src])
+public:
+    vector<bool> arr;
+    int a, b;
+    list<int>*table;
+    Hash(int a, int b):a(a),b(b)
     {
-        if (!visited[child])
-        {
-            DFS(child, visited, adj);
-        }
+        arr=vector<bool>(b - a + 1, false);
     }
-}
-void BFS(unordered_map<int, bool>visited, unordered_map<int, vector<int>> &adj)
-{
-    queue<int> nodes;
-    nodes.push(1);
-    visited[1] = true;
-
-    while (!nodes.empty())
+    int hash_function(int ele)
     {
-        int curr = nodes.front();
-        cout << curr << " ";
-        nodes.pop();
-
-        for (auto child : adj[curr])
-        {
-            if (!visited[child])
-            {
-                nodes.push(child);
-                visited[child] = true;
-            }
-        }
+        return ele % (b - a + 1);
     }
-}
+    void insert(int ele)
+    {
+        table[hash_function(ele)].push_back(ele);
+        // arr[hash_function(ele)] = true;
+    }
+    bool is_present(int ele)
+    {
+        return table[hash_function(ele)];
+    }
+};
 int main()
 {
-    vector<vector<int>> edges = {{1, 2}, {1, 5}, {2, 3}, {2, 6}, {3, 4}, {3, 5}, {5, 6}};
-    unordered_map<int, bool> visited;
-    unordered_map<int, vector<int>> adj;
-    for (vector<int> edge : edges)
+    
+    int ele;
+    cin >> ele;
+    Hash h(1,10);
+    h.insert(40);
+    h.insert(41);
+    h.insert(42);
+    h.insert(52);
+    if (h.is_present(ele))
     {
-        adj[edge[0]].push_back(edge[1]);
-        adj[edge[1]].push_back(edge[0]);
+        cout << "Element is present " << endl;
     }
-    // DFS(1, visited, adj);
-    // cout << endl;
-    BFS(visited,adj);
+    else
+    {
+        cout << "Ele is not present ";
+    }
     return 0;
 }
