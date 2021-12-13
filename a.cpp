@@ -1,46 +1,32 @@
 #include <bits/stdc++.h>
 using namespace std;
-class Hash
+int insert_ele(int arr[] ,int ele,  int posn ,int n)
 {
-public:
-    vector<bool> arr;
-    int a, b;
-    list<int>*table;
-    Hash(int a, int b):a(a),b(b)
+    int index = posn-1;
+    for(int i=n; i>index; i--)
     {
-        arr=vector<bool>(b - a + 1, false);
+         arr[i] =arr[i-1];
     }
-    int hash_function(int ele)
-    {
-        return ele % (b - a + 1);
-    }
-    void insert(int ele)
-    {
-        table[hash_function(ele)].push_back(ele);
-        // arr[hash_function(ele)] = true;
-    }
-    bool is_present(int ele)
-    {
-        return table[hash_function(ele)];
-    }
-};
+    arr[index] = ele;
+    return ++n;
+}
 int main()
 {
+
+    int arr[6] = {10,20,40,50};
+    int n = sizeof(arr) / sizeof(arr[0]);
     
-    int ele;
-    cin >> ele;
-    Hash h(1,10);
-    h.insert(40);
-    h.insert(41);
-    h.insert(42);
-    h.insert(52);
-    if (h.is_present(ele))
+    // n = insert_ele(arr,30,3,n );
+    // sort(arr,arr+n);
+
+    int k=2;
+    for(int i=0; i<n; i++)
     {
-        cout << "Element is present " << endl;
+        cout<<arr[i]<<" ";
     }
-    else
-    {
-        cout << "Ele is not present ";
-    }
+    cout<<endl;
+    cout<<arr[k-1];
+    
+    
     return 0;
 }
