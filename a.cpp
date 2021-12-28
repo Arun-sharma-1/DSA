@@ -1,54 +1,41 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-class Stack
-{
-public:
 
-    bool is_operator(string s)
+bool cmp(int a,int b)
+{
+    return a>b;
+}
+//For N elements we need N-1 iterations to sort the array
+void insertion_sort(vector<int>&arr) // & arr is nessacary
+{
+    for(int i=1; i<arr.size(); i++)
     {
-        return s=="+" || s=="-"||s=="*"||s=="/";
-    }
-    int calculate(int a, int b, string op)
-    {
-        if(op=="+") return a+b;
-        if(op=="*") return a*b;
-        if(op=="-") return a-b;
-        if(op=="/") return a/b;
-    }
-    int RPN(vector<string>&token)
-    {
-        stack<int>s;
-        int res;
-        for(string ele : token)
+        int index = i;
+        int value = arr[i];
+        while (index>0 && arr[index-1]> value)
         {
-            if(is_operator(ele))
-            {
-                int a, b;
-                b=s.top();
-                s.pop();
-                a=s.top();
-                s.pop();
-                res =calculate(a,b,ele);
-                if(res)
-                    s.push(res);
-            }
-            else
-            {
-                s.push(stoi(ele));
-            }
-
-              
+            arr[index]=arr[index-1];
+            index--;
         }
-        return s.top();
+        arr[index]=value;
+        
     }
-
-     
-};
-int main()
+}
+void display(vector<int>arr)
 {
-    Stack s;
-    vector<string>arr = {"1 ", "2", "7", "3", "-", "/", "2", "1", "5", "+", "*", "+"};
-    cout<<s.RPN(arr);
-     
+    for (auto ele: arr)
+    {
+            cout<<ele<<" ";
+    }
+    cout<<endl;
+}
+int main()
+{   vector<int>arr={1,2,14,1,1,2,311,123,34};
+    display(arr);
+    insertion_sort(arr);
+    for (auto ele: arr)
+    {
+            cout<<ele<<" ";
+    }
     return 0;
 }

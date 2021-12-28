@@ -40,6 +40,22 @@ void insertion_sort(vector<int>&arr)
         // arr[j+1] =curr;
     }
 }
+// we assume that first card is fixed and according to that we sort all the other elements 
+void insertion(vector<int>&arr)
+{
+    for(int i=1; i<arr.size(); i++)
+    {
+        int index = i;
+        int value = arr[i];
+        while (index>0 && arr[index-1]> value)
+        {
+            arr[index]=arr[index-1];
+            index--;
+        }
+        arr[index]=value;
+        
+    }
+}
 
 
 void display(vector<int>&arr)
