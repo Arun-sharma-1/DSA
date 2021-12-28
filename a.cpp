@@ -1,32 +1,54 @@
 #include <bits/stdc++.h>
 using namespace std;
-int insert_ele(int arr[] ,int ele,  int posn ,int n)
+class Stack
 {
-    int index = posn-1;
-    for(int i=n; i>index; i--)
+public:
+
+    bool is_operator(string s)
     {
-         arr[i] =arr[i-1];
+        return s=="+" || s=="-"||s=="*"||s=="/";
     }
-    arr[index] = ele;
-    return ++n;
-}
+    int calculate(int a, int b, string op)
+    {
+        if(op=="+") return a+b;
+        if(op=="*") return a*b;
+        if(op=="-") return a-b;
+        if(op=="/") return a/b;
+    }
+    int RPN(vector<string>&token)
+    {
+        stack<int>s;
+        int res;
+        for(string ele : token)
+        {
+            if(is_operator(ele))
+            {
+                int a, b;
+                b=s.top();
+                s.pop();
+                a=s.top();
+                s.pop();
+                res =calculate(a,b,ele);
+                if(res)
+                    s.push(res);
+            }
+            else
+            {
+                s.push(stoi(ele));
+            }
+
+              
+        }
+        return s.top();
+    }
+
+     
+};
 int main()
 {
-
-    int arr[6] = {10,20,40,50};
-    int n = sizeof(arr) / sizeof(arr[0]);
-    
-    // n = insert_ele(arr,30,3,n );
-    // sort(arr,arr+n);
-
-    int k=2;
-    for(int i=0; i<n; i++)
-    {
-        cout<<arr[i]<<" ";
-    }
-    cout<<endl;
-    cout<<arr[k-1];
-    
-    
+    Stack s;
+    vector<string>arr = {"1 ", "2", "7", "3", "-", "/", "2", "1", "5", "+", "*", "+"};
+    cout<<s.RPN(arr);
+     
     return 0;
 }
