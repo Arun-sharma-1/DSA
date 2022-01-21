@@ -8,7 +8,7 @@ bool is_subseq(string &str, string s1)
     int j = 0;
 
     if (str_len < s1_len)
-        return false; // jsut for optimization
+        return false; // just for optimization
     for (int i = 0; i < str_len && j < s1_len; i++)
     {
         if (s1[j] == str[i])

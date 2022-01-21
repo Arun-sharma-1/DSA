@@ -1,41 +1,54 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
+#define d 256
+void rabinKarp(string &str, string &patt, int q)
+{
+    int strLen = str.length();
+    int pattLen = patt.length();
 
-bool cmp(int a,int b)
-{
-    return a>b;
-}
-//For N elements we need N-1 iterations to sort the array
-void insertion_sort(vector<int>&arr) // & arr is nessacary
-{
-    for(int i=1; i<arr.size(); i++)
+    int h = 1;
+    for (int i = 0; i < pattLen - 1; i++)
     {
-        int index = i;
-        int value = arr[i];
-        while (index>0 && arr[index-1]> value)
+        h = (h * d) % q;
+    }
+    // hash value of str, patt;
+    int t = 0, p = 0;
+    for (int i = 0; i < pattLen; i++)
+    {
+        p = ((d * p) + patt[i]) % q;
+        t = ((d * t) + str[i]) % q;
+    }
+
+    for (int i = 0; i <= strLen - pattLen; i++)
+    {
+        if (p == t)
         {
-            arr[index]=arr[index-1];
-            index--;
+            // sliding window
+            int j;
+            for (j = 0; j < pattLen; j++)
+            {
+                if (str[i + j] != patt[j])
+                    break;
+            }
+            if (j == pattLen)
+                cout << i << " ";
         }
-        arr[index]=value;
-        
+
+        if (i < strLen - pattLen)
+        {
+            t = (d * (t - str[i] * h) + str[i + pattLen]) % q;
+        }
+        if (t < 0)
+        {
+            t = t + q;
+        }
     }
-}
-void display(vector<int>arr)
-{
-    for (auto ele: arr)
-    {
-            cout<<ele<<" ";
-    }
-    cout<<endl;
 }
 int main()
-{   vector<int>arr={1,2,14,1,1,2,311,123,34};
-    display(arr);
-    insertion_sort(arr);
-    for (auto ele: arr)
-    {
-            cout<<ele<<" ";
-    }
-    return 0;
+{
+    string str = "arunsharma";
+    string patt = "run";
+
+    int primeNO = 101;
+    rabinKarp(str, patt, primeNO);
 }

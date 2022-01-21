@@ -33,9 +33,28 @@ void forLower(string str, vector<int> count)
         }
     }
 }
+void forAllASCII(string str, vector<int> count)
+{
+    for (auto ele : str)
+    {
+        count[ele]++;
+    }
+    for (int i = 0; i < 256; i++)
+    {
+        if (count[i] > 0 && i>=97)
+        {
+            cout << (char)(i ) << " " << count[i] << endl;
+        }
+        else if(count[i] > 0 && i>=65)
+        {
+            cout << (char)(i ) << " " << count[i] << endl;
+        }
+       
+    }
+}
 int main()
 {
-    string str = "arunsharma";
+    string str = "leetcode";
     string str1 = "ARUNSHARMA";
     vector<int> count(26, 0);
 
