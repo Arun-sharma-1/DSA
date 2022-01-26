@@ -40,7 +40,7 @@ void forAllASCII(string str, vector<int> count)
         count[ele]++;
     }
     for (int i = 0; i < 256; i++)
-    {
+    { 
         if (count[i] > 0 && i>=97)
         {
             cout << (char)(i ) << " " << count[i] << endl;

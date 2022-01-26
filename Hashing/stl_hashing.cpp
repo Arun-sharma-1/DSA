@@ -14,4 +14,14 @@ int main()
     else{
         cout<<"Number of "<<name<<" is "<<phonebook[name]<<endl;
     }
+
+    //print this umap
+    for(auto ele: phonebook)
+    {
+        cout<<ele.first<<" "<<ele.second<<endl;
+    }
+    //second method
+    for(auto it=phonebook.begin(); it!=phonebook.end(); it++)
+        cout<<it->first<<" "<<it->first<<endl;
+
 }
