@@ -33,7 +33,7 @@ void Rabin_karp(string &str, string &patt, int q)
                 cout << i << " ";
         }
 
-        // computing next hash using prev = rolling hash
+        // computing next hash using prev if spurious hit = rolling hash
         if (i < m - n)
         {
             t = (d * (t - str[i] * h) + str[i + n]) % q;

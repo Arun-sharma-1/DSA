@@ -1,54 +1,95 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define d 256
-void rabinKarp(string &str, string &patt, int q)
+void forUpper(string str, vector<int> count)
 {
-    int strLen = str.length();
-    int pattLen = patt.length();
-
-    int h = 1;
-    for (int i = 0; i < pattLen - 1; i++)
+    for (auto ele : str)
     {
-        h = (h * d) % q;
+        count[ele - 65]++;
     }
-    // hash value of str, patt;
-    int t = 0, p = 0;
-    for (int i = 0; i < pattLen; i++)
+    for (int i = 0; i < 26; i++)
     {
-        p = ((d * p) + patt[i]) % q;
-        t = ((d * t) + str[i]) % q;
-    }
-
-    for (int i = 0; i <= strLen - pattLen; i++)
-    {
-        if (p == t)
+        if (count[i] > 0)
         {
-            // sliding window
-            int j;
-            for (j = 0; j < pattLen; j++)
-            {
-                if (str[i + j] != patt[j])
-                    break;
-            }
-            if (j == pattLen)
-                cout << i << " ";
-        }
-
-        if (i < strLen - pattLen)
-        {
-            t = (d * (t - str[i] * h) + str[i + pattLen]) % q;
-        }
-        if (t < 0)
-        {
-            t = t + q;
+            cout << char(i + 65) << " " << count[i];
+            cout << endl;
         }
     }
 }
+void forLower(string str, vector<int> count)
+{
+    for (auto ele : str)
+    {
+        count[ele - 'a']++;
+    }
+    for (int i = 0; i < 26; i++)
+    {
+        if (count[i] > 0)
+        {
+            cout << char(i + 97) << " " << count[i];
+            cout << endl;
+        }
+    }
+}
+void forAll(string str, vector<int> count)
+{
+    for (auto ele : str)
+    {
+        count[ele]++;
+    }
+
+    for (int i = 0; i < 256; i++)
+    {
+        if (count[i] > 0 && i >= 97)
+        {
+            // uppercase
+            cout << char(i) << " " << count[i];
+            cout << endl;
+        }
+        if (count[i] > 0 && i <= 90)
+        {
+            cout << char(i) << " " << count[i];
+            cout << endl;
+        }
+    }
+}
+bool isPalindrome(string str)
+{
+    int front = 0;
+    int end = str.length() - 1;
+    int i = 0;
+
+    while (end >= front)
+    {
+        if (isdigit(str[front]))
+            front++;
+        if (!isalnum(str[front]))
+            front++;
+        else if (str[front] != str[end])
+            return false;
+        else
+        {
+            front++;
+            end--;
+        }
+    }
+    return true;
+}
+char firstUniqueChar(string str, vector<int> count)
+{
+    for (auto ele : str)
+    {
+        count[ele]++;
+    }
+    for (int i = 0; i < 256; i++)
+    {
+        if (count[i] == 1)
+            return char(i);
+    }
+    return '-';
+}
 int main()
 {
-    string str = "arunsharma";
-    string patt = "run";
-
-    int primeNO = 101;
-    rabinKarp(str, patt, primeNO);
+    string str = "@@aAbc";
+    vector<int> count(256, 0);
+    cout << firstUniqueChar(str, count);
 }

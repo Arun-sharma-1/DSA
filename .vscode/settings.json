@@ -1,6 +1,7 @@
 {
     "C_Cpp.errorSquiggles": "Enabled",
     "files.associations": {
+        "*.sql": "sql",
         "iostream": "cpp",
         "new": "cpp",
         "ostream": "cpp",
@@ -68,6 +69,12 @@
         "thread": "cpp",
         "typeindex": "cpp",
         "typeinfo": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "ios": "cpp",
+        "xiosbase": "cpp",
+        "xstring": "cpp",
+        "xmemory": "cpp",
+        "xutility": "cpp",
+        "xlocale": "cpp"
     }
 }

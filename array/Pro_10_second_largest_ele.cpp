@@ -41,6 +41,22 @@ int secondlargest(int arr[], int n)
     }
     return res;
 }
+int secondLarget(int arr[], int n)
+{
+    //check for this method
+    int largest = getLargest(arr, n);
+    int secondlargest = arr[0];
+    // cout<<"largest "<<largest<<endl;
+    for (int i = 0; i < n; i++)
+    {
+        if (arr[i] > secondlargest && arr[i] < largest)
+        {
+            secondlargest = arr[i];
+            // cout<<"second "<<secondlargest<<endl;
+        }
+    }
+    return secondlargest;
+}
 
 int main()
 {

@@ -25,6 +25,29 @@ int count_freq(int arr[], int n)
         cout << arr[i] << " " << freq << endl;
     }
 }
+int findFrequency(int a[], int n)
+{
+    // Your code here
+    sort(a, a + n);
+    int freq = 1;
+    for (int i = 1; i < n; i++)
+    {
+        if (a[i] == a[i - 1])
+            freq++;
+
+        else if (a[i] != a[i - 1])
+        {
+
+            cout << freq << endl;
+            freq = 1;
+        }
+        if (i == n - 1)
+        {
+
+            cout << freq << endl;
+        }
+    }
+}
 int main()
 {
     int arr[] = {10, 10, 10, 20, 20, 30};

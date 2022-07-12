@@ -33,7 +33,7 @@ int main()
     floyd_washell(edges);
     for(auto edge : edges)
     {
-        cout<<edges[]
+        cout<<edge[0]<<" "<<edge[1]<<" "<<edge[2]<<endl;
     }
     
     

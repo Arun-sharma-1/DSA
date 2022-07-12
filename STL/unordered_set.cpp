@@ -2,7 +2,7 @@
 using namespace std;
 int main()
 {
-    unordered_set<int>set; //duplicate values are not allowed
+    unordered_set<int>set; //duplicate values are not allowed and random orders 
     set.insert(10);
     set.insert(2);
     set.insert(20);

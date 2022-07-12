@@ -1,18 +1,24 @@
+
 #include <bits/stdc++.h>
 using namespace std;
 bool is_palindrome(string &str)
 {
     int front = 0;
     int end = str.length() - 1;
-    while (front < end)
+    while (front <= end)
     {
-        if (!isalnum(str[front]))
+        if (isdigit(str[front]))
+            front++;
+        else if (!isalnum(str[front]))
             front++;
 
-        if (str[front] != str[end])
+        else if (str[front] != str[end])
             return false;
-        front++;
-        end--;
+        else
+        {
+            front++;
+            end--;
+        }
     }
     return true;
 }
