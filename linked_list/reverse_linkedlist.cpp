@@ -1,49 +1,71 @@
- #include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-class Node 
+class Node
 {
-    public:
+public:
     int data;
     Node *next;
     int size;
     Node(int data)
     {
-        this->data=data;
-        next=nullptr;
-        size=0;
+        this->data = data;
+        next = nullptr;
+        size = 0;
     }
-
 };
 class Linkedlist
 {
     Node *head;
     Node *tail;
-    public:
+
+public:
     Linkedlist()
     {
-          head=nullptr;
-            tail=nullptr;
+        head = nullptr;
+        tail = nullptr;
     }
 
     void push_back(int ele)
     {
-        Node *n=new Node(ele);
-        if(tail==nullptr)
+        Node *n = new Node(ele);
+        if (tail == nullptr)
         {
-            head=tail=n;
-    
+            head = tail = n;
         }
-        tail->next=n;
-        tail=n;
+        tail->next = n;
+        tail = n;
+    }
+    // NOT WORKING
+    Node *reverseList(Node *head)
+    {
+        if (head == nullptr || head->next == nullptr)
+            return head;
+        Node *temp = head;
+        Node *prev = nullptr;
+        while (temp != nullptr)
+        {
+            // cout<<"here "<<temp->data<<endl;
+            prev = temp->prev;
+            temp->prev = temp->next;
+            temp->next = prev;
+            temp = temp->prev;
+        }
+        Node *p = head;
+        while (p != nullptr)
+        {
+            cout << p->data << " ";
+            p = p->next;
+        }
+        return temp->prev;
     }
 
     int display_lst()
     {
-        Node *p=head;
-        while(p!=nullptr)
+        Node *p = head;
+        while (p != nullptr)
         {
-            cout<<p->data<<" ";
-            p=p->next;
+            cout << p->data << " ";
+            p = p->next;
         }
     }
 };
@@ -54,9 +76,6 @@ int main()
     lst.push_back(2);
     lst.push_back(3);
     lst.push_back(4);
-
-     
-  
 
     lst.display_lst();
     return 0;

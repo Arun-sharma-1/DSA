@@ -37,6 +37,11 @@ class TwoStack
     }
     int top_1()
     {
+        if(top_idx_1==-1)
+        {
+            cout<<"Stack empty ";
+            return 0;
+        }
         return arr[top_idx_1];
     }
     

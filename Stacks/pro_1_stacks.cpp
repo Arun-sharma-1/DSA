@@ -79,6 +79,7 @@
 //  maximum number of elements in stack at run time is 3.
 //  The data structure required to check whether an expression contains a balanced parenthesis is Stack 
 // Which data structure is used for implementing recursion--> Stack 
+//for undo/redo and forward/backward we use stack data structure
 
 /*
   Stack s;
