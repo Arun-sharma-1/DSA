@@ -8,18 +8,11 @@ public:
     Node *right;
     Node(int ele)
     {
-        data = ele;
         left = right = nullptr;
+        data = ele;
     }
 };
-void preorder(Node *root)
-{
-    if (root == nullptr)
-        return;
-    cout << root->data << " ";
-    preorder(root->left);
-    preorder(root->right);
-}
+// Recursive
 void inorder(Node *root)
 {
     if (root == nullptr)
@@ -28,44 +21,42 @@ void inorder(Node *root)
     cout << root->data << " ";
     inorder(root->right);
 }
-void inorder_itr(Node *root)
+// iterative
+void inorder_iter(Node *root)
 {
     Node *p = root;
-    stack<Node *> s;
-    while (p != nullptr || !s.empty())
+    stack<Node *> stk;
+    while (p != nullptr || !stk.empty())
     {
+
         while (p != nullptr)
         {
-            s.push(p);
+            stk.push(p);
             p = p->left;
         }
-        p = s.top();
-        s.pop();
+        p = stk.top();
+        stk.pop();
         cout << p->data << " ";
         p = p->right;
     }
 }
-void inorderitrr(Node *root)
+void postorder(Node *root)
 {
-    // left root right node
     if (root == nullptr)
         return;
-    stack<Node *> s;
-    Node *p = root;
-    while (p != nullptr || !s.empty())
-    {
-        while (p != nullptr)
-        {
-            s.push(p);
-            p = p->left;
-        }
-        p = s.top();
-        s.pop();
-        cout << p->data << " ";
-        p = p->right;
-    }
+    postorder(root->left);
+    postorder(root->right);
+    cout << root->data << " ";
 }
-
+void preorder(Node *root)
+{
+    if (root == nullptr)
+        return;
+    cout << root->data << " ";
+    preorder(root->left);
+    preorder(root->right);
+}
+// preorder iterative
 void preorder_iterative(Node *root)
 {
     if (root == nullptr)
@@ -84,23 +75,8 @@ void preorder_iterative(Node *root)
             s.push(p->left);
     }
 }
-void preo_itr(Node *root)
-{
-    if (root == nullptr)
-        return;
-    stack<Node *> s;
-    s.push(root);
-    while (!s.empty())
-    {
-        Node *p = s.top();
-        s.pop();
-        cout << p->data << " ";
-        if (p->right != nullptr)
-            s.push(p->right);
-        if (p->left != nullptr)
-            s.push(p->left);
-    }
-}
+
+// iterative
 void postorder_iter(Node *root)
 {
     Node *p = root;
@@ -121,10 +97,52 @@ void postorder_iter(Node *root)
         p = s.top();
         s.pop();
         cout << p->data << " ";
-        p = s.top();
     }
 }
+int Level_order(Node *root)
+{
+    if (root == nullptr)
+        return -1;
+    queue<Node *> q;
+    q.push(root);
+    q.push(nullptr);
 
+    while (!q.empty())
+    {
+        Node *p = q.front();
+        q.pop();
+        if (p != nullptr)
+        {
+            cout << p->data << " ";
+            if (p->left)
+                q.push(p->left);
+            if (p->right)
+                q.push(p->right);
+        }
+        else if (!q.empty())
+        {
+            q.push(nullptr);
+        }
+    }
+}
+void Level_order_new(Node *root)
+{
+    if (root == nullptr)
+        return;
+    queue<Node *> q;
+    q.push(root);
+
+    while (!q.empty())
+    {
+        Node *p = q.front();
+        q.pop();
+        cout << p->data << " ";
+        if (p->left)
+            q.push(p->left);
+        if (p->right)
+            q.push(p->right);
+    }
+}
 void levelorder(Node *root)
 {
     if (root == nullptr)
@@ -138,8 +156,8 @@ void levelorder(Node *root)
         {
             Node *p = q.front();
             q.pop();
-
             cout << p->data << " ";
+
             if (p->left)
                 q.push(p->left);
             if (p->right)
@@ -147,109 +165,85 @@ void levelorder(Node *root)
         }
     }
 }
-int countNode(Node *root, int k)
-{
-    // nodes at k distance
-    if (root == nullptr)
-        return 0;
-    if (k == 0)
-        cout << root->data;
-    else
-    {
-        countNode(root->left, k - 1);
-        countNode(root->right, k - 1);
-    }
-}
-void lo(Node *root)
-{
-    if (root == nullptr)
-        return;
-    queue<Node *> q;
-    q.push(root);
-    while (!q.empty())
-    {
-        Node *p = q.front();
-        q.pop();
-        cout << p->data << " ";
-        if (p->left)
-            q.push(p->left);
-        if (p->right)
-            q.push(p->right);
-    }
-}
-int Sum_Node(Node *root)
-{
-    int x = 0, y = 0;
-    if (root == nullptr)
-        return 0;
-    x = Sum_Node(root->left);
-    y = Sum_Node(root->right);
-    if (x > y)
-        return x + 1;
-    else
-        return y + 1;
-}
-void levor(Node *root)
-{
-    if (root == nullptr)
-        return;
-    queue<Node *> q;
-    q.push(root);
-    while (!q.empty())
-    {
-        Node *p = q.front();
-        q.pop();
-        cout << p->data << " ";
-        if (p->left)
-            q.push(p->left);
-        if (p->right)
-            q.push(p->right);
-    }
-}
-void leftview(Node *root)
-{
-    if (root == nullptr)
-        return;
-    queue<Node *> q;
-    q.push(root);
-    while (!q.empty())
-    {
-        int size = q.size();
 
+void zigzagTree(Node *root)
+{
+    if (root == nullptr)
+        return;
+    int count = 0;
+    queue<Node *> q;
+    q.push(root);
+    vector<int> ans;
+
+    while (!q.empty())
+    {
+        count++;
+        int size = q.size();
+        vector<int> data(size);
         for (int i = 0; i < size; i++)
         {
             Node *p = q.front();
             q.pop();
-            if (i == size-1)
-                cout << p->data << " ";
+            data[i]=p->data; //due to this in each index value will be updated after each loop
             if (p->left)
                 q.push(p->left);
             if (p->right)
                 q.push(p->right);
         }
+        if (count % 2 == 0)
+        {
+            reverse(data.begin(), data.end());
+            for (auto i : data)
+                ans.push_back(i);
+        }
+        else
+            for (auto i : data)
+                ans.push_back(i);
     }
+    for (auto ele : ans)
+        cout << ele << " ";
 }
-void maxmWidth(Node *root)
+//WORKING 
+vector<int> zigZagTraversal(Node *root)
 {
-    if(root == nullptr) return;
-    queue<Node *>q;
-    int res=0;
+    // Code here
+    vector<int> result;
+    queue<Node *> q;
     q.push(root);
-    while(!q.empty())
+    bool isRightDirection = true;
+    while (!q.empty())
     {
         int size = q.size();
-        res = max(res , size);
-        cout<<"size  --> "<<size<<endl;
-        for(int i=0; i<size; i++)
+        vector<int> ans(size);
+        for (int i = 0; i < size; i++)
         {
             Node *p = q.front();
             q.pop();
-            if(p->left)q.push(p->left);
-            if(p->right)q.push(p->right);
+            int index = isRightDirection ? i : size - 1 - i;
+            ans[index] = p->data;
+
+            if (p->left)
+                q.push(p->left);
+            if (p->right)
+                q.push(p->right);
         }
+        isRightDirection = !isRightDirection;
+        for (auto i : ans)
+            result.push_back(i);
     }
-    cout<<res;
+
+    return result;
 }
+// max value in tree
+int max_value(Node *root)
+{
+    if (root == nullptr)
+        return INT_MIN;
+    int x = max_value(root->left);
+    int y = max_value(root->right);
+    return max(root->data, max(x, y));
+}
+
 int main()
 {
     Node *root = new Node(1);
@@ -257,15 +251,24 @@ int main()
     root->left->left = new Node(11);
 
     root->right = new Node(3);
-    root->right->left = new Node(9);
+    root->right->left = new Node(4);
     root->right->left->left = new Node(10);
-
     root->right->right = new Node(5);
+
     root->right->right->left = new Node(6);
     root->right->right->left->left = new Node(8);
     root->right->right->left->right = new Node(9);
 
     root->right->right->right = new Node(7);
-    maxmWidth(root);
-    return 0;
+    cout << "Inorder: " << endl;
+    inorder_iter(root);
+    cout << endl;
+    cout << "Post order : " << endl;
+    postorder(root);
+    cout << endl;
+    cout << "Pre order : " << endl;
+    preorder(root);
+    cout << endl;
+    cout << "Zig Zag or spiral order " << endl;
+    zigzagTree(root);
 }
