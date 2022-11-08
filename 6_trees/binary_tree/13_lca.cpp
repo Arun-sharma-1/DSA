@@ -12,22 +12,29 @@ public:
         data = ele;
     }
 };
-int res = 0;
-int fn(Node *root)
+Node *lca(Node *root, int n1, int n2)
 {
+    // Your code here
     if (root == nullptr)
-        return 0;
-    int x = fn(root->left);
-    int y = fn(root->right);
+    {
+        return nullptr;
+    }
+    if (root->data == n1 || root->data == n2)
+    {
+        return root;
+    }
 
-    res = max(res, x + y + 1);
-    return 1 + max(x, y);//ADDING NODE 
-}
-int diameter(Node *root)
-{
+    Node *leftans = lca(root->left, n1, n2);
+    Node *rightans = lca(root->right, n1, n2);
 
-    int answer = fn(root);
-    return res;
+    if (leftans && rightans)
+        return root;
+    if (leftans == nullptr && rightans)
+        return rightans;
+    if (leftans && rightans == nullptr)
+        return leftans;
+    else
+        return nullptr;
 }
 int main()
 {

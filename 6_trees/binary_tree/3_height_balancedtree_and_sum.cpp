@@ -1,29 +1,42 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 class Node
 {
-    public:
+public:
     int data;
     Node *left;
     Node *right;
     Node(int ele)
     {
-        left=right=nullptr;
-        data=ele;
+        left = right = nullptr;
+        data = ele;
     }
-
 };
 int height_tree(Node *root)
 {
-    if(root==nullptr) return 0;
+    if (root == nullptr)
+        return 0;
     int x = 0, y = 0;
-    x=height_tree(root->left);
-    y=height_tree(root->right);
+    x = height_tree(root->left);
+    y = height_tree(root->right);
 
     if (x > y)
-        return x+1;
+        return x + 1;
     else
-        return y+1;
+        return y + 1;
+}
+bool isBalanced(Node *root)
+{
+    //  Your Code herE
+    if (root == nullptr)
+        return true;
+    bool left = isBalanced(root->left);
+    bool right = isBalanced(root->right);
+    int diff = abs(height_tree(root->left) - height_tree(root->right)) <= 1;
+    if (left && right && diff)
+        return true;
+    else
+        return false;
 }
 int sum_node(Node *root)
 {
@@ -53,5 +66,5 @@ int main()
     root->right->left->right->right = new Node(80);
     root->right->left->right->right->left = new Node(90);
 
-    cout<<height_tree(root);
+    cout << height_tree(root);
 }

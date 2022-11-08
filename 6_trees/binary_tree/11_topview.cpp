@@ -14,26 +14,55 @@ public:
 };
 void topView(Node *root)
 {
-    if(root == nullptr)return;
-    map<int,int>treeNode;//track of hdis(horizontal distance) and node data
-    queue<pair<Node * ,int >>q;
-    q.push(make_pair(root,0));//data and hdis
-    while(!q.empty())
+    if (root == nullptr)
+        return;
+    map<int, int> treeNode; // track of hdis(horizontal distance) and node data
+    queue<pair<Node *, int>> q;
+    q.push(make_pair(root, 0)); // data and hdis
+    while (!q.empty())
     {
-        pair<Node *,int>temp = q.front();
+        pair<Node *, int> temp = q.front();
         q.pop();
         Node *frontNode = temp.first;
-        int hdis=temp.second;
-        if(treeNode.find(hdis) == treeNode.end())
+        int hdis = temp.second;
+        if (treeNode.find(hdis) == treeNode.end())
         {
-            treeNode[hdis]=frontNode->data;
+            treeNode[hdis] = frontNode->data;
         }
-        if(frontNode->left)q.push(make_pair(frontNode->left,hdis-1));
-        if(frontNode->right)q.push(make_pair(frontNode->right,hdis+1));
+        if (frontNode->left)
+            q.push(make_pair(frontNode->left, hdis - 1));
+        if (frontNode->right)
+            q.push(make_pair(frontNode->right, hdis + 1));
     }
-    for(auto it=treeNode.begin(); it!=treeNode.end(); it++)
+    for (auto it = treeNode.begin(); it != treeNode.end(); it++)
     {
-        cout<<it->second<<" ";
+        cout << it->second << " ";
+    }
+}
+void bottomView(Node *root)
+{
+    if (root == nullptr)
+        return;
+    map<int, int> treeNode; // track of hdis(horizontal distance) and node data
+    queue<pair<Node *, int>> q;
+    q.push(make_pair(root, 0)); // data and hdis
+    while (!q.empty())
+    {
+        pair<Node *, int> temp = q.front();
+        q.pop();
+        Node *frontNode = temp.first;
+        int hdis = temp.second;
+
+        treeNode[hdis] = frontNode->data;
+
+        if (frontNode->left)
+            q.push(make_pair(frontNode->left, hdis - 1));
+        if (frontNode->right)
+            q.push(make_pair(frontNode->right, hdis + 1));
+    }
+    for (auto it = treeNode.begin(); it != treeNode.end(); it++)
+    {
+        cout << it->second << " ";
     }
 }
 int main()
@@ -54,5 +83,4 @@ int main()
     root->right->right->right = new Node(7);
 
     topView(root);
-    
 }
