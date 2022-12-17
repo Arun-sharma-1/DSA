@@ -14,7 +14,8 @@ public:
 };
 Node *lca(Node *root, int n1, int n2)
 {
-    // Your code here
+    /*return null if left and right both are null , if left is not null return left and if right is not null
+    then return right in any case if both left and right is not null that will be lowest common ancestor*/
     if (root == nullptr)
     {
         return nullptr;
