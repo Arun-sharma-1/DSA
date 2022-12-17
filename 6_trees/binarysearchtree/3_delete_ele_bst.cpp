@@ -81,8 +81,8 @@ public:
                 root->data = succ->data;
                 root->right = delele(root->right, succ->data);
             }
-            return root;
         }
+        return root;
     }
 
     void delete_node(int ele)

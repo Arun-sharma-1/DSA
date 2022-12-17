@@ -16,6 +16,7 @@ public:
 class BST
 {
     Node *root;
+
 public:
     BST()
     {
@@ -36,30 +37,31 @@ public:
     {
         root = insert_ele(root, ele);
     }
-
-    int min_value()
+    void inorder(Node *root, vector<int> &v)
     {
         if (root == nullptr)
-            return -1;
+            return;
+        inorder(root->left, v);
+        v.push_back(root->data);
+        inorder(root->right, v);
+    }
+    Node *createBST(int s, int e, vector<int> v)
+    {
+        if (s > e)
+            return nullptr;
+        int mid = (s + e) / 2;
+        Node *root = new Node(v[mid]);
+        root->left = createBST(s, mid - 1, v);
+        root->right = createBST(mid + 1, e, v);
 
-        while (root != nullptr)
-        {
-            root = root->left;
-            cout << root->data << " ";
-        }
+        return root;
     }
-    int count=0;
-     void Kth_smallest_element(Node *root , int k)
+    Node *buildBalancedTree(Node *root)
     {
-        if (root == nullptr) return;
-        Kth_smallest_element(root->left ,k );
-        count++;
-        if(k==count)  cout << root->data << " ";
-        Kth_smallest_element(root->right ,k);
-    }
-    void inorder(int k)
-    {
-        Kth_smallest_element(root, k);
+        // Code here
+        vector<int> v;
+        inorder(root, v);
+        return createBST(0, v.size() - 1, v);
     }
 };
 
@@ -71,5 +73,7 @@ int main()
     {
         tree.insert(ele);
     }
-    tree.inorder(8);
+    if (root == nullptr)
+        return true;
+    return isbinary(root, INT_MIN, INT_MAX);
 }

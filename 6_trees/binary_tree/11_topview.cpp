@@ -17,6 +17,7 @@ void topView(Node *root)
     if (root == nullptr)
         return;
     map<int, int> treeNode; // track of hdis(horizontal distance) and node data
+    //for every hdis there will only be one data that will be on top
     queue<pair<Node *, int>> q;
     q.push(make_pair(root, 0)); // data and hdis
     while (!q.empty())
@@ -25,7 +26,7 @@ void topView(Node *root)
         q.pop();
         Node *frontNode = temp.first;
         int hdis = temp.second;
-        if (treeNode.find(hdis) == treeNode.end())
+        if (treeNode .find(hdis) == treeNode.end())
         {
             treeNode[hdis] = frontNode->data;
         }

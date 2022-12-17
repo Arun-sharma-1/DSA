@@ -77,26 +77,27 @@ void preorder_iterative(Node *root)
 }
 
 // iterative
-void postorder_iter(Node *root)
+// using two stack we can maintain the order of left right root
+void postorderI(Node *root)
 {
-    Node *p = root;
     stack<Node *> s;
-    while (p != nullptr || !s.empty())
+    stack<Node *> out;
+    s.push(root);
+
+    while (!s.empty())
     {
-        while (p != nullptr)
-        {
-            p = p->left;
-            s.push(p);
-        }
-        p = s.top();
-        while (p != nullptr)
-        {
-            p = p->right;
-            s.push(p);
-        }
-        p = s.top();
+        Node *p = s.top();
         s.pop();
-        cout << p->data << " ";
+        out.push(p);
+        if (p->left)
+            s.push(p->left);
+        if (p->right)
+            s.push(p->right);
+    }
+    while (!out.empty())
+    {
+        cout << out.top()->data << " ";
+        out.pop();
     }
 }
 int Level_order(Node *root)
@@ -165,7 +166,7 @@ void levelorder(Node *root)
         }
     }
 }
-
+//working
 void zigzagTree(Node *root)
 {
     if (root == nullptr)
@@ -184,7 +185,7 @@ void zigzagTree(Node *root)
         {
             Node *p = q.front();
             q.pop();
-            data[i]=p->data; //due to this in each index value will be updated after each loop
+            data[i] = p->data; // due to this in each index value will be updated after each loop
             if (p->left)
                 q.push(p->left);
             if (p->right)
@@ -203,7 +204,7 @@ void zigzagTree(Node *root)
     for (auto ele : ans)
         cout << ele << " ";
 }
-//WORKING 
+// WORKING
 vector<int> zigZagTraversal(Node *root)
 {
     // Code here

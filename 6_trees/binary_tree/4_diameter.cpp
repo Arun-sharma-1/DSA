@@ -12,6 +12,23 @@ public:
         data = ele;
     }
 };
+
+
+//ADITYA VERMA SOLN
+int findDiameter(TreeNode *root , int &res)
+{
+    if(root == nullptr) return 0;
+    int left = findDiameter(root->left , res);
+    int right = findDiameter(root->right,res);
+    
+    int temp = 1+ max(left, right); //  root is also included so find max from left and right and add 1
+    int ans = max(temp,1+left+right); // root is not included so add left path + right path + 1 node
+    res= max(res,ans);
+    return temp; // returning the temp calculated result in each step to find  maxm
+}
+
+
+
 int res = 0;
 int fn(Node *root)
 {
