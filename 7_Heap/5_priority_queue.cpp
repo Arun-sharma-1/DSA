@@ -7,7 +7,7 @@ void max_priority_queue()
     pq.push(10);
     pq.push(15);
     pq.push(5);
-    cout << pq.size() << endl;
+    cout << pq.size() << endl; //pq.pop(); //pq.empty()
     cout << pq.top() << endl;
 }
 void program_1()

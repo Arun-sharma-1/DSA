@@ -26,7 +26,7 @@ void buildheap(vector<int> &arr, int size)
         heapify(arr, i, size);
     }
 }
-void DeleteMax(vector<int> &arr, int index, int size)
+void DeleteMax(vector<int> &arr, int size)
 {
     swap(arr[0], arr[size]);
     // cout << "Max ele : " << arr[size];
@@ -35,16 +35,5 @@ void DeleteMax(vector<int> &arr, int index, int size)
 }
 int main()
 {
-    vector<int> arr = {10, 20, 40, 30, 80, 60, 50};
-    buildheap(arr, arr.size() - 1);
-    for (int i = 0; i < 7; i++)
-    {
-        cout << arr[i] << " ";
-    }
-    cout<<endl;
-    DeleteMax(arr,0,arr.size()-1);
-    for (int i = 0; i < 6; i++)
-    {
-        cout << arr[i] << " ";
-    }
+    
 }
