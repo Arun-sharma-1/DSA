@@ -39,7 +39,7 @@ void Heap_sort(vector<int> &arr, int size)
 
         //step 2;
         maxHeapify(arr, 0 , i); // size of elemennt is reducing in each step so size is i
-
+        //passing size is important in maxHeapify and maxheapify should take size as a argument also
     }
      
 }
