@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+using namespace std;
+bool validPath(int n, vector<vector<int>> &edges, int source, int destination)
+{
+    unordered_map<int, bool> visited;
+    queue<int> q;
+    unordered_map<int, vector<int>> adj;
+    for (auto edge : edges)
+    {
+        adj[edge[0]].push_back(edge[1]);
+        adj[edge[1]].push_back(edge[0]);
+    }
+    q.push(source);
+    visited[source] = true;
+    while (!q.empty())
+    {
+        int curr = q.front();
+        q.pop();
+
+        for (auto ele : adj[curr])
+        {
+            if (visited[ele] == false)
+            {
+                q.push(ele);
+                visited[ele] = true;
+            }
+        }
+    }
+    if (visited[destination])
+        return true;
+    return false;
+}
+int main()
+{
+/*
+Input: n = 6, edges = [[0,1],[0,2],[3,5],[5,4],[4,3]], source = 0, destination = 5
+Output: false
+Explanation: There is no path from vertex 0 to vertex 5.
+*/
+}

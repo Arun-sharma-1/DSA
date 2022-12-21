@@ -20,7 +20,9 @@ void printGraph(vector<int> adj[], int V)
 }
 int main()
 {
-    vector<int> adj[v];
+    // int adj[v];  array
+    //we have to create v vectors
+    vector<int> adj[v]; // array of vector
     addEdge(adj, 0, 1);
     addEdge(adj, 0, 2);
     addEdge(adj, 1, 3);

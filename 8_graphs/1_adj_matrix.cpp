@@ -40,6 +40,7 @@ void print(int arr[][v])
 int main()
 {
     int adjMatrix[v][v];
+    // int adjM[v][v] = { 0 };  // intialize 2d array with all values as 0
     init(adjMatrix);
     addedge_undir(adjMatrix, 0, 1);
     addedge_undir(adjMatrix, 0, 2);
