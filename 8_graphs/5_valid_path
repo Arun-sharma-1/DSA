@@ -30,11 +30,40 @@ bool validPath(int n, vector<vector<int>> &edges, int source, int destination)
         return true;
     return false;
 }
+// WITH DFS
+bool check(unordered_map<int, vector<int>> &adj, int s, int d, unordered_map<int, bool> &visited)
+{
+    if (s == d)
+        return true;
+    if (visited[s] == true)
+        return false;
+
+    visited[s] = true;
+    for (auto ele : adj[s])
+    {
+        if (check(adj, ele, d, visited))
+            return true;
+    }
+    return false;
+}
+bool validPath(int n, vector<vector<int>> &edges, int s, int d)
+{
+    unordered_map<int, bool> visited;
+    unordered_map<int, vector<int>> adj;
+    // space = v + 2e
+    for (auto edge : edges)
+    {
+        adj[edge[0]].push_back(edge[1]);
+        adj[edge[1]].push_back(edge[0]);
+    }
+
+    return check(adj, s, d, visited);
+}
 int main()
 {
-/*
-Input: n = 6, edges = [[0,1],[0,2],[3,5],[5,4],[4,3]], source = 0, destination = 5
-Output: false
-Explanation: There is no path from vertex 0 to vertex 5.
-*/
+    /*
+    Input: n = 6, edges = [[0,1],[0,2],[3,5],[5,4],[4,3]], source = 0, destination = 5
+    Output: false
+    Explanation: There is no path from vertex 0 to vertex 5.
+    */
 }

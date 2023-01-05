@@ -37,7 +37,7 @@ int main()
     for(auto edge: edges)
     {
         dist[edge[0]]=INF;
-        dist[edge[1]]=INF;       
+        dist[edge[1]]=INF;          
         adj[edge[0]].push_back({edge[1],edge[2]});
         adj[edge[1]].push_back({edge[0],edge[2]});
 
