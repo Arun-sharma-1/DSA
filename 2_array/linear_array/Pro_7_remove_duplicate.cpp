@@ -22,16 +22,16 @@ int approach_1st(int arr[], int n)
     return res;
 }
 
-int approach_2nd(int arr[] , int n)
+int approach_2nd(int arr[], int n)
 {
-    int res=1;
-    for(int i=1; i<n; i++)
+    int res = 0;
+    for (int i = 0; i < n - 1; i++)
     {
-        if(arr[i]!=arr[res-1])
+        if (arr[i] != arr[i + 1])
         {
-            arr[res]=arr[i];
-            res++;
+            arr[res++] = arr[i];
         }
+        arr[res++] = arr[n - 1];
     }
     return res;
 }
