@@ -5,6 +5,7 @@ using namespace std;
     bitonic array means, it is increasing at one time and go to its peak and then decreasing
     so we have to find the maximum in that and the peak element will be maximum
 */
+//->aditya verma
 int peakElement(int arr[], int n)
 {
     // if the element is greater from its left side element and right side element then it is a peak element
@@ -44,7 +45,7 @@ int peakElement(int arr[], int n)
     }
     return -1;
 }
-// ACCEPTED ON GFG
+// ACCEPTED ON GFG 
 int peakelement(int arr[], int n)
 {
     // Your code here

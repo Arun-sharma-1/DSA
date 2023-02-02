@@ -65,3 +65,86 @@ bool isCycle(int v, vector<int> adj[])
 int main()
 {
 }
+
+/* 
+class Solution
+{
+public:
+    // Function to detect cycle in an undirected graph.
+    bool detectCycle(int s, vector<int> adj[], vector<int> &visited, int parent)
+    {
+        visited[s] = true;
+
+        for (auto child : adj[s])
+        {
+            if (child == parent)
+                continue;
+            if (visited[child] == true && child != parent)
+                return true;
+
+            if (detectCycle(child, adj, visited, s))
+                return true;
+        }
+        return false;
+    }
+    bool isCycle(int V, vector<int> adj[])
+    {
+        vector<int> visited(V, false);
+        for (int i = 0; i < V; i++)
+        {
+            if (!visited[i])
+                if (detectCycle(i, adj, visited, -1))
+                    return true;
+        }
+        return false;
+    }
+};
+
+
+
+
+
+
+
+//USING BFS
+class Solution {
+  public:
+    bool checkCycle(int s, vector<int>adj[] ,vector<int>&visited)
+    {
+        queue<pair<int,int>>q;
+        q.push({s,-1});
+        visited[s] = true;
+        while(!q.empty())
+        {
+            pair<int,int> curr = q.front();
+            int value = curr.first;
+            int parent = curr.second;
+            q.pop();
+            for(auto v : adj[value])
+            {
+                if(v == parent ) continue;
+                else if(v!=parent && visited[v]) return true;
+
+                visited[v] = true;
+                q.push({v,value});
+                
+                
+            }
+        }
+        return false;
+    }
+    bool isCycle(int V, vector<int> adj[]) {
+        
+        vector<int>visited(V, false);
+        
+         for(int i = 0; i<V; i++)
+         {
+             if(!visited[i])
+             {
+                 if(checkCycle(i , adj , visited)) return true;
+             }
+         }
+         return false;
+    }
+};
+*/

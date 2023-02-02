@@ -1,15 +1,17 @@
 #include <bits/stdc++.h>
 using namespace std;
+//TWO SUM
 bool isPair(int a[], int n, int sum)
 {
-    unordered_set<int> uset;
+    // unordered_set<int> uset;
+    unordered_map<int,int>uset;
     int res =0;
     for (int i = 0; i < n; i++)
     {
         if (uset.find(sum - a[i]) != uset.end())
             return true;
-        else
-            uset.insert(a[i]);
+        else uset[a[i]]++;
+            // uset.insert(a[i]);
     }
     return false;
 }

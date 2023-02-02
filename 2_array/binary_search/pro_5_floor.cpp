@@ -12,7 +12,7 @@ int floor(int arr[], int n, int ele)
             return arr[mid];
         
         //if element is greater then current element in array then only it can be candidate for floor 
-        if (ele > arr[mid])
+        if (arr[mid] < ele)
         {
             start = mid + 1;
             // if (arr[mid] < ele)
@@ -20,7 +20,7 @@ int floor(int arr[], int n, int ele)
         }
         else
         {
-            end = mid - 1;
+            end = mid - 1
         }
     }
     return res;

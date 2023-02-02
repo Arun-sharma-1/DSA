@@ -37,7 +37,7 @@ void Heap_sort(vector<int> &arr, int size)
         swap(arr[i], arr[0]);
         i--;
 
-        //step 2;
+        //step 2;=> maintaning max heap
         maxHeapify(arr, 0 , i); // size of elemennt is reducing in each step so size is i
         //passing size is important in maxHeapify and maxheapify should take size as a argument also
     }

@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-//Given a string s, rearrange the characters of s so that any two adjacent characters are not the same.
+// Given a string s, rearrange the characters of s so that any two adjacent characters are not the same.
 string reorganizeString(string s)
 {
     unordered_map<char, int> um;

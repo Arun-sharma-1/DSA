@@ -6,7 +6,7 @@ int longestSubarray(int arr[] ,int n,int k)
     int sum =0;
     int i=0,j=0;
     int ans=0;
-    while(j<k)
+    while(j<n)
     {
         sum+=arr[j];
         if(sum < k)

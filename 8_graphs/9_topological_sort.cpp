@@ -6,10 +6,15 @@ vector<int> topSort(int V, vector<int> adj[])
     vector<int> indegree(V, 0);
     for (int i = 0; i < V; i++)
     {
-        vector<int> temp = adj[i];
-        for (int i = 0; i < temp.size(); i++)
+        // vector<int> temp = adj[i];
+        // for (int i = 0; i < temp.size(); i++)
+        // {
+        //     indegree[temp[i]]++;
+        // }
+
+        for (auto ele : adj[i])
         {
-            indegree[temp[i]]++;
+            indegree[ele]++;
         }
     }
     vector<int> res;

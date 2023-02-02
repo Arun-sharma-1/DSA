@@ -12,6 +12,7 @@ int maxmProfit(int arr[], int n)
             profit += arr[i] - arr[i - 1];
         }
     }
+    }
     return profit;
 }
 int main()

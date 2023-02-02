@@ -25,7 +25,7 @@ bool CBT(Node *root, int index, int total)
     // leaf
     if (root == nullptr)
         return true;
-    // index > total means gap is present
+    // index > total(node) means gap is present
     if (index >= total)
         return false;
     // both left and right present
