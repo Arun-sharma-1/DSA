@@ -44,6 +44,28 @@ void stockSpan(int arr[], int n)
         cout << ele << ",";
     }
 }
+void stockSpan(int arr[], int n)
+{
+    //MIK
+    vector<int> v;
+    stack<pair<int, int>> s;
+    for (int i = 0; i < n; i++)
+    {
+        int span = 1;
+        while (s.size() > 0 && s.top().first <= arr[i])
+        {
+            span += s.top().second;
+            s.pop();
+        }
+        s.push({arr[i], span});
+        v.push_back(span);
+    }
+
+    for (auto ele : v)
+    {
+        cout << ele << ",";
+    }
+}
 int main()
 {
     // int arr[] = {100, 80, 60, 70, 60, 75, 85};

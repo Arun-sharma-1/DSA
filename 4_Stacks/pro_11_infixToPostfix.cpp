@@ -1,20 +1,27 @@
 #include <bits/stdc++.h>
 using namespace std;
- bool hashigherprecedence(char op1 , char op2)
-    {
-        if(op1==op2) return true; // if both operators are same like +,+ eg=a+b+c
-        if(op1=='+' && op2=='-' || op1=='-'&&op2=='+')return true;
-        if(op1=='*' && op2=='/' || op1=='/' && op2=='*') return true;
-        
-        if(op1=='*' && op2=='+') return true;
-        if(op1=='*' && op2=='-') return true;
-        if(op1=='/' && op2=='+') return true;
-        if(op1=='/' && op2=='-') return true;
-        if(op1=='^')return true;
-        
-        return false;
-        
-    }
+bool hashigherprecedence(char op1, char op2)
+{
+    if (op1 == op2)
+        return true; // if both operators are same like +,+ eg=a+b+c
+    if (op1 == '+' && op2 == '-' || op1 == '-' && op2 == '+')
+        return true;
+    if (op1 == '*' && op2 == '/' || op1 == '/' && op2 == '*')
+        return true;
+
+    if (op1 == '*' && op2 == '+')
+        return true;
+    if (op1 == '*' && op2 == '-')
+        return true;
+    if (op1 == '/' && op2 == '+')
+        return true;
+    if (op1 == '/' && op2 == '-')
+        return true;
+    if (op1 == '^')
+        return true;
+
+    return false;
+}
 string infixToPostfix(string s)
 {
     // Your code here
@@ -26,7 +33,7 @@ string infixToPostfix(string s)
             res += s[i];
         else if (s[i] == '(')
             stk.push(s[i]);
-        //this order of else if should be like this because we are handling different cases for (
+        // this order of else if should be like this because we are handling different cases for (
         else if (s[i] == ')')
         {
             while (!stk.empty() && stk.top() != '(')
@@ -45,6 +52,7 @@ string infixToPostfix(string s)
                 res += stk.top();
                 stk.pop();
             }
+
             if (s[i] != '(')
                 stk.push(s[i]);
         }
@@ -59,9 +67,12 @@ string infixToPostfix(string s)
 }
 int main()
 {
-    //a+b+c
+    // a+b+c
     string input = "A*(B+C)/D";
     cout << infixToPostfix(input);
+    /*
+    to find infix to prefix , first reverse the given string and apply the same operation and then agian reverset it =>#ComputerAdx
+    */
     cout << infixToPrefix(input);
     return 0;
 }

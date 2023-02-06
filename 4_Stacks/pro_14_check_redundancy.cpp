@@ -4,7 +4,7 @@ bool isOperator(char a)
 {
     return (a == '+' || a == '-' || a == '*' || a == '/');
 }
-// will check is there any operator present between the opening and closing bracket if there then it is not redundant
+//is there any operator present between the opening and closing bracket if there then it is not redundant
 int checkRedundancy(string s)
 {
     // code here

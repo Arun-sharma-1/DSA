@@ -11,7 +11,7 @@ vector<int> NSR(int arr[], int n)
         {
             right.push_back(n); // inserting index of last element to make last element less
         }
-        else if (s.size() > 0 && arr[i] >= s.top().first)
+        else if (s.size() > 0 && arr[i] > s.top().first)
         {
             right.push_back(s.top().second);
         }
