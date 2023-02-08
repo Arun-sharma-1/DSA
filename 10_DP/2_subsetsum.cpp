@@ -1,5 +1,37 @@
 #include <bit/stdc++.h>
 using namespace std;
+// RECURSIVE
+bool solve(vector<int> arr, int n, int sum, int dp[][1000])
+{
+    // base condn
+    if (sum == 0)
+        return true;
+    if (n == 0)
+        return false;
+
+    if (dp[n][sum] != -1)
+        return dp[n][sum];
+    // choice diagram
+    if (arr[n - 1] <= sum)
+    {
+        // choice => select kru ya nhi
+
+        return dp[n][sum] = solve(arr, n - 1, sum - arr[n - 1], dp) || solve(arr, n - 1, sum, dp);
+    }
+    else
+        return dp[n][sum] = solve(arr, n - 1, sum, dp);
+}
+
+bool isSubsetSum(vector<int> arr, int sum)
+{
+
+    int n = arr.size();
+    int dp[110][1000];
+    memset(dp, -1, sizeof(dp));
+    return solve(arr, n, sum, dp);
+}
+
+// ITERATIVE
 bool isSubsetSum(vector<int> arr, int sum)
 {
     int n = arr.size();
@@ -29,7 +61,8 @@ bool isSubsetSum(vector<int> arr, int sum)
         {
             if (arr[i - 1] <= j)
             {
-                dp[i][j] = max(dp[i - 1][j - arr[i - 1]], dp[i - 1][j]);
+                // dp[i][j] = max(dp[i - 1][j - arr[i - 1]], dp[i - 1][j]);
+                dp[i][j] = dp[i - 1][j - arr[i - 1]] || dp[i - 1][j];
             }
             else
                 dp[i][j] = dp[i - 1][j];
