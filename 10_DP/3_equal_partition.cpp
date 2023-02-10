@@ -6,6 +6,7 @@ int equalPartition(int N, int arr[])
     int target = sum / 2;
 
     bool dp[N + 1][sum + 1];
+    //if total sum is odd then parition not possible 
     if (sum % 2 != 0)
         return 0;
 

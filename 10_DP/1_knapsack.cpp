@@ -8,7 +8,7 @@ int solve(int W, int wt[], int val[], int n)
         return 0;
     if (dp[n][W] != -1)
         return dp[n][W];
-    if (W >= wt[n - 1])
+    if (wt[n - 1] <= W)
     {
         return dp[n][W] = max(val[n - 1] + solve(W - wt[n - 1], wt, val, n - 1), solve(W, wt, val, n - 1));
     }

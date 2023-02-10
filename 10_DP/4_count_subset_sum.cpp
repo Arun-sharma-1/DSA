@@ -24,7 +24,7 @@ int perfectSum(int arr[], int n, int sum)
             if (arr[i - 1] <= j)
             {
                 //1 change is here 
-                dp[i][j] = (dp[i - 1][j - arr[i - 1]] + dp[i - 1][j]) % mod;
+                dp[i][j] = (dp[i - 1][j - arr[i - 1]] + dp[i - 1][j]) % mod; //+ 
             }
             else
                 dp[i][j] = dp[i - 1][j] % mod;

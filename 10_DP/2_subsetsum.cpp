@@ -6,7 +6,7 @@ bool solve(vector<int> arr, int n, int sum, int dp[][1000])
     // base condn
     if (sum == 0)
         return true;
-    if (n == 0)
+    if (n == 0) // abb sum 0 nhi h => elements nhi h , or sum> 0 return false
         return false;
 
     if (dp[n][sum] != -1)
@@ -72,4 +72,5 @@ bool isSubsetSum(vector<int> arr, int sum)
 }
 int main()
 {
+    // array diya h , or sum diya h = > elements ko select kr k sum ban skta h kya
 }
