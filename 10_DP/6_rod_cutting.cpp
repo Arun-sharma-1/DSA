@@ -27,7 +27,7 @@ int cutRod(int price[], int n)
         {
             if (len[i - 1] <= j)
             {
-                dp[i][j] = max(dp[i - 1][j], price[i - 1] + dp[i][j - i]);
+                dp[i][j] = max(dp[i - 1][j], price[i - 1] + dp[i][j - len[i - 1]]);
             }
             else
                 dp[i][j] = dp[i - 1][j];

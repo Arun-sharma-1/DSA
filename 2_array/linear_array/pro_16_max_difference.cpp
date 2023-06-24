@@ -18,7 +18,7 @@ int max_value(int arr[], int n)
 }
 int maxi_value(int arr[], int n)
 {
-    // the idea is to keep track of minimum and maximum value 
+    // the idea is to keep track of minimum and maximum value
     int result = arr[1] - arr[0];
     int min_val = arr[0];
     for (int i = 0; i < n; i++)
@@ -27,6 +27,22 @@ int maxi_value(int arr[], int n)
         min_val = min(min_val, arr[i]);
     }
     return result;
+}
+
+// leetcode 2016
+int maximumDifference(vector<int> &nums)
+{
+    int n = nums.size();
+    int maxDiff = -1;
+    int minVal = INT_MAX;
+
+    for (int i = 0; i < n; i++)
+    {
+        minVal = min(minVal, nums[i]);
+        int difference = nums[i] - minVal;
+        maxDiff = max(maxDiff, difference);
+    }
+    return maxDiff <= 0 ? -1 : maxDiff;
 }
 
 int main()

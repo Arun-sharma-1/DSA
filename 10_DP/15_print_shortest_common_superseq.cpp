@@ -45,6 +45,7 @@ string shortestCommonSupersequence(string s1, string s2)
         }
         else if (dp[i - 1][j] > dp[i][j - 1])
         {
+            //agar common nhi h too bhi include krna h =>supersequence m 
             res.push_back(s1[i - 1]);
             i--;
         }

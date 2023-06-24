@@ -47,7 +47,7 @@ class LinkedList
             head=temp1;
             return;
         }
-    // iterating to n-2 coz we have to stop befoer that node 
+    // iterating to n-2 coz we have to stop before that node 
     // temp2 is the node before where we want to insert
     // we are swapping address to insert ele in linked list 
         Node *temp2=head;

@@ -63,6 +63,29 @@ public:
         }
         return head;
     }
+    Node *removeDuplicates(Node *head)
+    {
+        unordered_map<int, bool> mp;
+        Node *curr = head;
+        Node *prev = nullptr;
+
+        while (curr != nullptr)
+        {
+            if (mp[curr->data] == true)
+            {
+                prev->next = curr->next;
+                delete (curr);
+                curr = prev->next;
+            }
+            else
+            {
+                mp[curr->data] = true;
+                prev = curr;
+                curr = curr->next;
+            }
+        }
+        return head;
+    }
 
     void display_lst()
     {

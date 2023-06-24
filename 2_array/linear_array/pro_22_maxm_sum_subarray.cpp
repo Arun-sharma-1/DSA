@@ -1,4 +1,4 @@
-//NOT WORKING 
+// NOT WORKING
 #include <bits/stdc++.h>
 using namespace std;
 int subArray(int arr[], int n)
@@ -17,14 +17,28 @@ int subArray(int arr[], int n)
 }
 int MaxSubArray(int arr[], int n)
 {
-    int res =arr[0];
+    int res = arr[0];
     int maxEnding = arr[0];
-    for(int i=1; i<n; i++)
+    for (int i = 1; i < n; i++)
     {
-        maxEnding = max(maxEnding + arr[i] , arr[i]);
-        res = max(res , maxEnding);
+        maxEnding = max(maxEnding + arr[i], arr[i]);
+        res = max(res, maxEnding);
     }
     return res;
+}
+int maxSubArray(vector<int> &nums)
+{
+    int n = nums.size();
+    int sum = 0;
+    int maxSum = INT_MIN;
+    for (int i = 0; i < n; i++)
+    {
+        sum += nums[i];
+        maxSum = max(sum, maxSum);
+        if (sum <= 0)
+            sum = 0;
+    }
+    return maxSum;
 }
 
 int main()

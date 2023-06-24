@@ -18,6 +18,7 @@ int main()
 {
     int arr[]={8,1,2,2,3}; // 4 0 1 1 3
     int n = sizeof(arr)/sizeof(arr[0]);
+    
     sort(arr,arr+n,greater<int>());
     getSmallest(arr,n);
     return 0;

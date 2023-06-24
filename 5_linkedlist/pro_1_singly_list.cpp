@@ -51,23 +51,23 @@ public:
     //     head = n;
     //     size = 1;
     // }
-    // void pop_front()
-    // {
-    //     Node *p = head;
-    //     if (head == nullptr)
-    //     {
-    //         cout << "underflow " << endl;
-    //         return;
-    //     }
+    void pop_front()
+    {
+        Node *p = head;
+        if (head == nullptr)
+        {
+            cout << "underflow " << endl;
+            return;
+        }
 
-    //     head = head->next;
-    //     size--;
-    //     // we are doing this condn coz if we removed 1st element and if there is not element in the list then where tail points to
-    //     if (head == nullptr)
-    //     // {
-    //         tail = nullptr;
-    //     }
-    // }
+        head = head->next;
+        size--;
+        // we are doing this condn coz if we removed 1st element and if there is not element in the list then where tail points to
+        if (head == nullptr)
+        // {
+            tail = nullptr;
+        }
+    }
     // void pop_end()
     // {
     //     if (tail == nullptr)
@@ -89,25 +89,25 @@ public:
     //     tail = p;
     //     size--;
     // }
-    // void insert(int data, int n)
-    // {
-    //     Node *temp1 = new Node(data);
+    void insert(int data, int n)
+    {
+        Node *temp1 = new Node(data);
 
-    //     if (n == 1)
-    //     {
-    //         temp1->next = head;
-    //         head = temp1;
-    //         return;
-    //     }
+        if (n == 1)
+        {
+            temp1->next = head;
+            head = temp1;
+            return;
+        }
 
-    //     Node *temp2 = head;
-    //     for (int i = 0; i < n - 2; i++) // upto n-2 will givve the exact posn where we want to insert
-    //     {
-    //         temp2 = temp2->next;
-    //     }
-    //     temp1->next = temp2->next;
-    //     temp2->next = temp1;
-    // }
+        Node *temp2 = head;
+        for (int i = 0; i < n - 2; i++) // upto n-2 will givve the exact posn where we want to insert
+        {
+            temp2 = temp2->next;
+        }
+        temp1->next = temp2->next;
+        temp2->next = temp1;
+    }
 
     // int view_last()
     // {

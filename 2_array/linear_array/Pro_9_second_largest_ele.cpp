@@ -23,8 +23,7 @@ int print2largest(int arr[], int n)
     }
     return sl;
 }
-//if elements are not same then we can use priority queue 
-
+// if elements are not same then we can use priority queue
 
 int secondLarget(int arr[], int n)
 {
@@ -64,6 +63,29 @@ int secondLargestElement(int arr[], int n)
         }
     }
     return sl;
+}
+
+// FIND SECOND MAXIMUM ELEMENT IN SINGLE ITERATION
+int print2largest(int arr[], int n)
+{
+    if (n < 2)
+        return -1;
+    int firstMax = INT_MIN, secondMax = INT_MIN;
+    for (int i = 0; i < n; i++)
+    {
+        if (arr[i] > firstMax)
+        {
+            secondMax = firstMax;
+            firstMax = arr[i];
+        }
+        else if (arr[i] > secondMax && arr[i] < firstMax) // BOTH THE CONDITION ARE NESSACARY
+        {
+            secondMax = arr[i];
+        }
+    }
+    if (secondMax == INT_MIN)
+        return -1;
+    return secondMax;
 }
 int main()
 {

@@ -9,7 +9,9 @@ void subset(string str, string curr = " ", int index = 0)
         return;
     }
     subset(str, curr, index + 1);
-    subset(str, curr + str[index], index + 1);
+    subset(str, curr + str[index], index + 1);\
+    
+    curr.erase(curr.begin() + 0);
 }
 void subset (string str, unordered_set < string >&uset, string curr =" ", int index = 0) 
 {

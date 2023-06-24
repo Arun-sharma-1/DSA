@@ -84,5 +84,12 @@
         "xlocnum": "cpp",
         "xstddef": "cpp",
         "xtr1common": "cpp"
-    }
+    },
+    "C_Cpp.default.cppStandard": "c++17",
+    "C_Cpp.default.cStandard": "c17",
+    "C_Cpp.default.intelliSenseMode": "macos-clang-x86",
+    "C_Cpp.inlayHints.autoDeclarationTypes.enabled": true,
+    "C_Cpp.inlayHints.parameterNames.enabled": true,
+    "C_Cpp.intelliSenseEngine": "Tag Parser",
+    "C_Cpp.intelliSenseEngineFallback": "enabled"
 }
