@@ -18,7 +18,7 @@ vector<int> frequencySort(vector<int> &nums)
 {
     int n = nums.size();
     unordered_map<int, int> mp;
-    priority_queue<pi, vector<pi>, compare> pq;
+    priority_queue<pi, vector<pi>, compare> pq; // freq , value 
     vector<int> ans;
     for (auto ele : nums)
     {

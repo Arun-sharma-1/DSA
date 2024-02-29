@@ -152,13 +152,14 @@ public:
     // iteration
     void insert_ele(int ele)
     {
-        Node *p = root;
         Node *n = new Node(ele);
         if (root == nullptr)
         {
-            root = n; // p=n is wrong
+            root = n; 
             return;
         }
+        Node *p = root;
+
         while (p != nullptr)
         {
             if (ele <= p->data)
@@ -181,8 +182,8 @@ public:
             }
         }
     }
-                                                                     
 };
+
 int main()
 {
     BST tree;

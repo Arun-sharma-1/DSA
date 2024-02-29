@@ -12,12 +12,12 @@ public:
         data = ele;
     }
 };
-void verticalTransverse(Node *root , int hdis , map<int,vector<int>>&map)
+void verticalTraverse(Node *root , int hdis , map<int,vector<int>>&map)
 {
     if(root == nullptr)return;
     map[hdis].push_back(root->data);
-    verticalTransverse(root->left,hdis-1,map);
-    verticalTransverse(root->right,hdis+1,map);
+    verticalTraverse(root->left,hdis-1,map);
+    verticalTraverse(root->right,hdis+1,map);
 
 }
 int main()
@@ -37,7 +37,7 @@ int main()
 
     int hdis=0;
     map<int,vector<int>>map;    // this map will store hdis and vector of nodes 
-    verticalTransverse(root,hdis,map);
+    verticalTraverse(root,hdis,map);
     for(auto it=map.begin(); it!=map.end(); it++)
     {
         for(int i=0; i<(it->second).size(); i++)

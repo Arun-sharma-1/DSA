@@ -4,7 +4,7 @@ bool hashigherprecedence(char op1, char op2)
 {
     if (op1 == op2)
         return true; // if both operators are same like +,+ eg=a+b+c
-    if (op1 == '+' && op2 == '-' || op1 == '-' && op2 == '+')
+    if (op1 == '+' && op2 == '-' || op1 == '-' && op2 == '+') //if same precdence than also we have to return true;
         return true;
     if (op1 == '*' && op2 == '/' || op1 == '/' && op2 == '*')
         return true;
@@ -46,6 +46,8 @@ string infixToPostfix(string s)
 
         else if (!isalnum(s[i]))
         {
+            //stack m phele kam precedence wala hona chaiye fir higher precedence wala agar
+            //high precedence wala h tab tak pop kro
             while (!stk.empty() && hashigherprecedence(stk.top(), s[i]))
             {
 

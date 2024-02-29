@@ -56,7 +56,7 @@ public:
         // return head;
 
 
-       int count = 0;
+        int count = 0;
         ListNode *temp = head;
         
         while(temp != nullptr)

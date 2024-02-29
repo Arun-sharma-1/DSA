@@ -91,11 +91,11 @@ int NSL(int arr[], int n)
             max = area[i];
         }
     }
-    for(int i=0; i<n; i++)
+    for (int i = 0; i < n; i++)
     {
-        cout<<area[i]<<",";
+        cout << area[i] << ",";
     }
-    cout<<endl;
+    cout << endl;
     return max;
 }
 int main()
@@ -105,3 +105,59 @@ int main()
     cout << NSL(arr, n);
     return 0;
 }
+
+/*
+int n;
+    vector<int> nextSmallestRight(vector<int>&heights)
+    {
+        stack<pair<int,int>>s;
+        vector<int>ns(n);
+
+        for(int i=n-1; i>=0; i--)
+        {
+            while(s.size() >0 && s.top().first>=heights[i])
+            {
+                s.pop();
+            }
+
+            s.size() == 0 ? ns[i] = n : ns[i] = s.top().second;
+
+            s.push({heights[i] , i});
+        }
+        return ns;
+    }
+    vector<int> nextSmallestLeft(vector<int>&heights)
+    {
+        stack<pair<int,int>>s;
+        vector<int>ns(n);
+
+        for(int i=0; i<n; i++)
+        {
+            while(s.size() > 0 && s.top().first >= heights[i])
+            {
+                s.pop();
+            }
+            s.size() == 0 ? ns[i] = -1 : ns[i] = s.top().second;
+
+            s.push({heights[i] , i });
+        }
+        return ns;
+    }
+    int largestRectangleArea(vector<int>& heights) {
+        n = heights.size();
+
+        vector<int>nsR = nextSmallestRight(heights);
+        vector<int>nsL = nextSmallestLeft(heights);
+
+
+        int maxArea = 0;
+        for(int i=0; i<n; i++)
+        {
+            int  width = heights[i] * (nsR[i] - nsL[i] -1);
+            maxArea = max(maxArea ,width);
+        }
+
+
+        return maxArea;
+    }
+*/

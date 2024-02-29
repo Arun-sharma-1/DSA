@@ -4,8 +4,9 @@ void transpose(int a[3][3], int m, int n)
 {
     for (int i = 0; i < m; i++)
     {
-        for (int j = 0; j <= i; j++)
+        for (int j = 0; j <i; j++)
         {
+            // j<i coz we want to perform (0,1) and (1,0) only once
             swap(a[i][j], a[j][i]);
         }
     }

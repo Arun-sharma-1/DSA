@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-//subarray which have sum = 0
+// subarray which have sum = 0
 bool subArrayExists(int arr[], int n)
 {
     unordered_set<int> uset;
@@ -9,9 +9,10 @@ bool subArrayExists(int arr[], int n)
     {
         prefixSum += arr[i];
 
-        //if element is 0 itself 
-        if(arr[i] == 0) return true;
-        
+        // if element is 0 itself
+        if (arr[i] == 0)
+            return true;
+
         if (prefixSum == 0)
             return true;
 

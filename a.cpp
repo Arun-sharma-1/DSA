@@ -1,271 +1,269 @@
 #include <bits/stdc++.h>
+#include <stdio.h>
+// stack<int>s;
 using namespace std;
-class Node
+#define COMPUTER 1
+#define HUMAN 2
+#define SIDE 3
+#define COMPUTERMOVE 'O'
+#define HUMANMOVE 'X'
+void showBoard(char board[][SIDE])
 {
-public:
-    int data;
-    Node *left;
-    Node *right;
-    Node(int ele)
-    {
-        data = ele;
-        left = right = nullptr;
-    }
-};
-void preorder(Node *root)
-{
-    if (root == nullptr)
-        return;
-    cout << root->data << " ";
-    preorder(root->left);
-    preorder(root->right);
+    printf("\t\t\t %c | %c | %c \n", board[0][0], board[0][1], board[0][2]);
+    printf("\t\t\t-----------\n");
+    printf("\t\t\t %c | %c | %c \n", board[1][0], board[1][1], board[1][2]);
+    printf("\t\t\t-----------\n");
+    printf("\t\t\t %c | %c | %c \n\n", board[2][0], board[2][1], board[2][2]);
 }
-void inorder(Node *root)
+void showInstructions()
 {
-    if (root == nullptr)
-        return;
-    inorder(root->left);
-    cout << root->data << " ";
-    inorder(root->right);
+    printf("\nChoose a cell numbered from 1 to 9 as below and play\n\n");
+    printf("\t\t\t 1 | 2 | 3 \n");
+    printf("\t\t\t-----------\n");
+    printf("\t\t\t 4 | 5 | 6 \n");
+    printf("\t\t\t-----------\n");
+    printf("\t\t\t 7 | 8 | 9 \n\n");
 }
-void inorder_itr(Node *root)
+void initialise(char board[][SIDE])
 {
-    Node *p = root;
-    stack<Node *> s;
-    while (p != nullptr || !s.empty())
-    {
-        while (p != nullptr)
-        {
-            s.push(p);
-            p = p->left;
-        }
-        p = s.top();
-        s.pop();
-        cout << p->data << " ";
-        p = p->right;
-    }
-}
-void inorderitrr(Node *root)
-{
-    // left root right node
-    if (root == nullptr)
-        return;
-    stack<Node *> s;
-    Node *p = root;
-    while (p != nullptr || !s.empty())
-    {
-        while (p != nullptr)
-        {
-            s.push(p);
-            p = p->left;
-        }
-        p = s.top();
-        s.pop();
-        cout << p->data << " ";
-        p = p->right;
-    }
-}
 
-void preorder_iterative(Node *root)
-{
-    if (root == nullptr)
-        return;
-    stack<Node *> s;
-    s.push(root);
-    while (!s.empty())
+    for (int i = 0; i < SIDE; i++)
     {
-        Node *p = s.top();
-        s.pop();
-        cout << p->data << " ";
-        // pushing right first bacasue then stack will contain left most on top
-        if (p->right != nullptr)
-            s.push(p->right);
-        if (p->left != nullptr)
-            s.push(p->left);
+        for (int j = 0; j < SIDE; j++)
+            board[i][j] = '*';
     }
 }
-void preo_itr(Node *root)
+void declareWinner(int whoseTurn)
 {
-    if (root == nullptr)
-        return;
-    stack<Node *> s;
-    s.push(root);
-    while (!s.empty())
-    {
-        Node *p = s.top();
-        s.pop();
-        cout << p->data << " ";
-        if (p->right != nullptr)
-            s.push(p->right);
-        if (p->left != nullptr)
-            s.push(p->left);
-    }
+    if (whoseTurn == COMPUTER)
+        printf("COMPUTER has won\n");
+    else
+        printf("HUMAN has won\n");
 }
-void postorder_iter(Node *root)
+bool rowCrossed(char board[][SIDE])
 {
-    Node *p = root;
-    stack<Node *> s;
-    while (p != nullptr || !s.empty())
+    for (int i = 0; i < SIDE; i++)
     {
-        while (p != nullptr)
-        {
-            p = p->left;
-            s.push(p);
-        }
-        p = s.top();
-        while (p != nullptr)
-        {
-            p = p->right;
-            s.push(p);
-        }
-        p = s.top();
-        s.pop();
-        cout << p->data << " ";
-        p = s.top();
+        if (board[i][0] == board[i][1] &&
+            board[i][1] == board[i][2] &&
+            board[i][0] != '*')
+            return (true);
     }
+    return (false);
 }
-
-void levelorder(Node *root)
+bool columnCrossed(char board[][SIDE])
 {
-    if (root == nullptr)
-        return;
-    queue<Node *> q;
-    q.push(root);
-    while (!q.empty())
+    for (int i = 0; i < SIDE; i++)
     {
-        int count = q.size();
-        for (int i = 0; i < count; i++)
-        {
-            Node *p = q.front();
-            q.pop();
-
-            cout << p->data << " ";
-            if (p->left)
-                q.push(p->left);
-            if (p->right)
-                q.push(p->right);
-        }
+        if (board[0][i] == board[1][i] &&
+            board[1][i] == board[2][i] &&
+            board[0][i] != '*')
+            return (true);
     }
+    return (false);
 }
-int countNode(Node *root, int k)
+bool diagonalCrossed(char board[][SIDE])
 {
-    // nodes at k distance
-    if (root == nullptr)
-        return 0;
-    if (k == 0)
-        cout << root->data;
+    if (board[0][0] == board[1][1] &&
+        board[1][1] == board[2][2] &&
+        board[0][0] != '*')
+        return (true);
+    if (board[0][2] == board[1][1] &&
+        board[1][1] == board[2][0] &&
+        board[0][2] != '*')
+        return (true);
+    return (false);
+}
+bool gameOver(char board[][SIDE])
+{
+    return (rowCrossed(board) || columnCrossed(board) || diagonalCrossed(board));
+}
+int minimax(char board[][SIDE], int depth, bool isAI)
+{
+    int score = 0;
+    int bestScore = 0;
+    if (gameOver(board) == true)
+    {
+        if (isAI == true)
+            return -10;
+        if (isAI == false)
+            return +10;
+    }
     else
     {
-        countNode(root->left, k - 1);
-        countNode(root->right, k - 1);
+        if (depth < 9)
+        {
+            if (isAI == true)
+            {
+                bestScore = -999;
+                for (int i = 0; i < SIDE; i++)
+                {
+                    for (int j = 0; j < SIDE; j++)
+                    {
+                        if (board[i][j] == '*')
+                        {
+                            board[i][j] = COMPUTERMOVE;
+                            score = minimax(board, depth + 1, false);
+                            board[i][j] = '*';
+                            if (score > bestScore)
+                            {
+                                bestScore = score;
+                            }
+                        }
+                    }
+                }
+                return bestScore;
+            }
+            else
+            {
+                bestScore = 999;
+                for (int i = 0; i < SIDE; i++)
+                {
+                    for (int j = 0; j < SIDE; j++)
+                    {
+                        if (board[i][j] == '*')
+                        {
+                            board[i][j] = HUMANMOVE;
+                            score = minimax(board, depth + 1, true);
+                            board[i][j] = '*';
+                            if (score < bestScore)
+                            {
+                                bestScore = score;
+                            }
+                        }
+                    }
+                }
+                return bestScore;
+            }
+        }
+        else
+        {
+            return 0;
+        }
     }
 }
-void lo(Node *root)
+int bestMove(char board[][SIDE], int moveIndex)
 {
-    if (root == nullptr)
-        return;
-    queue<Node *> q;
-    q.push(root);
-    while (!q.empty())
+    int x = -1, y = -1;
+    int score = 0, bestScore = -999;
+    for (int i = 0; i < SIDE; i++)
     {
-        Node *p = q.front();
-        q.pop();
-        cout << p->data << " ";
-        if (p->left)
-            q.push(p->left);
-        if (p->right)
-            q.push(p->right);
+        for (int j = 0; j < SIDE; j++)
+        {
+            if (board[i][j] == '*')
+            {
+                board[i][j] = COMPUTERMOVE;
+                score = minimax(board, moveIndex + 1, false);
+                board[i][j] = '*';
+                if (score > bestScore)
+                {
+                    bestScore = score;
+                    x = i;
+                    y = j;
+                }
+            }
+        }
     }
+    return x * 3 + y;
 }
-int Sum_Node(Node *root)
-{
-    int x = 0, y = 0;
-    if (root == nullptr)
-        return 0;
-    x = Sum_Node(root->left);
-    y = Sum_Node(root->right);
-    if (x > y)
-        return x + 1;
-    else
-        return y + 1;
-}
-void levor(Node *root)
-{
-    if (root == nullptr)
-        return;
-    queue<Node *> q;
-    q.push(root);
-    while (!q.empty())
-    {
-        Node *p = q.front();
-        q.pop();
-        cout << p->data << " ";
-        if (p->left)
-            q.push(p->left);
-        if (p->right)
-            q.push(p->right);
-    }
-}
-void leftview(Node *root)
-{
-    if (root == nullptr)
-        return;
-    queue<Node *> q;
-    q.push(root);
-    while (!q.empty())
-    {
-        int size = q.size();
 
-        for (int i = 0; i < size; i++)
-        {
-            Node *p = q.front();
-            q.pop();
-            if (i == size-1)
-                cout << p->data << " ";
-            if (p->left)
-                q.push(p->left);
-            if (p->right)
-                q.push(p->right);
-        }
-    }
-}
-void maxmWidth(Node *root)
+void playTicTacToe(int whoseTurn)
 {
-    if(root == nullptr) return;
-    queue<Node *>q;
-    int res=0;
-    q.push(root);
-    while(!q.empty())
+    char board[SIDE][SIDE];
+    int moveIndex = 0, x = 0, y = 0;
+    initialise(board);
+    showInstructions();
+    while (gameOver(board) == false && moveIndex != SIDE * SIDE)
     {
-        int size = q.size();
-        res = max(res , size);
-        cout<<"size  --> "<<size<<endl;
-        for(int i=0; i<size; i++)
+        int n;
+        if (whoseTurn == COMPUTER)
         {
-            Node *p = q.front();
-            q.pop();
-            if(p->left)q.push(p->left);
-            if(p->right)q.push(p->right);
+            n = bestMove(board, moveIndex);
+            x = n / SIDE;
+            y = n % SIDE;
+            board[x][y] = COMPUTERMOVE;
+            printf("COMPUTER has put a %c in cell %d\n\n", COMPUTERMOVE,
+                   n + 1);
+            showBoard(board);
+            moveIndex++;
+            whoseTurn = HUMAN;
+        }
+        else if (whoseTurn == HUMAN)
+        {
+            printf("You can insert in the following positions : ");
+            for (int i = 0; i < SIDE; i++)
+                for (int j = 0; j < SIDE; j++)
+                    if (board[i][j] == '*')
+                        printf("%d ", (i * 3 + j) + 1);
+            printf("\n\nEnter the position = ");
+            scanf("%d", &n);
+            n--;
+            x = n / SIDE;
+            y = n % SIDE;
+            if (board[x][y] == '*' && n < 9 && n >= 0)
+            {
+                board[x][y] = HUMANMOVE;
+                printf("\nHUMAN has put a %c in cell %d\n\n", HUMANMOVE,
+                       n + 1);
+                showBoard(board);
+                moveIndex++;
+                whoseTurn = COMPUTER;
+            }
+            else if (board[x][y] != '*' && n < 9 && n >= 0)
+            {
+                printf("\nPosition is occupied, select any one place from the available places\n\n");
+            }
+            else if (n < 0 || n > 8)
+            {
+                printf("Invalid position\n");
+            }
         }
     }
-    cout<<res;
+    if (gameOver(board) == false && moveIndex == SIDE * SIDE)
+        printf("It's a draw\n");
+    else
+    {
+        if (whoseTurn == COMPUTER)
+            whoseTurn = HUMAN;
+        else if (whoseTurn == HUMAN)
+            whoseTurn = COMPUTER;
+        declareWinner(whoseTurn);
+    }
 }
 int main()
 {
-    Node *root = new Node(1);
-    root->left = new Node(2);
-    root->left->left = new Node(11);
 
-    root->right = new Node(3);
-    root->right->left = new Node(9);
-    root->right->left->left = new Node(10);
-
-    root->right->right = new Node(5);
-    root->right->right->left = new Node(6);
-    root->right->right->left->left = new Node(8);
-    root->right->right->left->right = new Node(9);
-
-    root->right->right->right = new Node(7);
-    maxmWidth(root);
+    char cont = 'y';
+    do
+    {
+        char choice;
+        printf("Do you want to start first?(y/n) : ");
+        scanf(" %c", &choice);
+        if (choice == 'n')
+            playTicTacToe(COMPUTER);
+        else if (choice == 'y')
+            playTicTacToe(HUMAN);
+        else
+            printf("Invalid choice\n");
+        printf("\nDo you want to quit(y/n) : ");
+        scanf(" %c", &cont);
+    } while (cont == 'n');
+    return (0);
+}
+#include <bits/stdc++.h>
+using namespace std;
+void fun(char s[], int n)
+{
+    for (int i = 0; s[i] != '\0'; i++)
+        if (i % 2 == 0)
+            s[i] = s[i] - n;
+        else
+            s[i] = s[i] + n;
+}
+int main()
+{
+    char str[] = “Hello_World”;
+    fun(str, 2);
+    cout << str << endl;
     return 0;
 }

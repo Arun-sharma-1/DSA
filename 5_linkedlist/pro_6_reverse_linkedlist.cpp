@@ -48,21 +48,18 @@ public:
         }
         return prev; // returning is ness coz now head becomes last element ,// now this become head
     }
-    return temp->prev;
-}
 
-int
-display_lst()
-{
-    Node *p = head;
-    while (p != nullptr)
+    int display_lst()
     {
-        cout << p->data << " ";
-        p = p->next;
+        Node *p = head;
+        while (p != nullptr)
+        {
+            cout << p->data << " ";
+            p = p->next;
+        }
     }
-}
-}
-;
+};
+
 int main()
 {
     Linkedlist lst;

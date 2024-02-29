@@ -68,43 +68,48 @@ public:
             p = p->next;
         }
     }
-    Node *mergeTwoList(Node *a, Node *b)
+    ListNode *mergeTwoLists(ListNode *list1, ListNode *list2)
     {
-        Node *head;
-        if (a == nullptr)
-            return b;
-        if (b == nullptr)
-            return a;
-        if (a->data < b->data)
+        ListNode *head = nullptr;
+        ListNode *tail = nullptr;
+
+        if (list1 == nullptr)
+            return list2;
+        if (list2 == nullptr)
+            return list1;
+
+        if (list1->val > list2->val)
         {
-            head = tail = a;
-            a = a->next;
+            head = tail = list2;
+            list2 = list2->next;
         }
         else
         {
-            head = tail = b;
-            b = b->next;
+            head = tail = list1;
+            list1 = list1->next;
         }
-        while (a != nullptr && b != nullptr)
+
+        while (list1 != nullptr && list2 != nullptr)
         {
-            if (a->data >= b->data)
+            if (list1->val >= list2->val)
             {
-                tail->next = b;
-                tail = b;
-                b = b->next;
+                tail->next = list2;
+                tail = list2;
+                list2 = list2->next;
             }
             else
             {
-                tail->next = a;
-                tail = a;
-                a = a->next;
+                tail->next = list1;
+                tail = list1;
+                list1 = list1->next;
             }
         }
 
-        if (a == nullptr)
-            tail->next = b;
-        else
-            tail->next = a;
+        if (list1 != nullptr)
+            tail->next = list1;
+        if (list2 != nullptr)
+            tail->next = list2;
+
         return head;
     }
     Node *sortedMerge(Node *head1, Node *head2)
@@ -115,7 +120,7 @@ public:
             return head2;
         if (head2 == nullptr)
             return head1;
-        Node *tail; // just to get the head 
+        Node *tail; // just to get the head
         if (head1->data > head2->data)
         {
             head = head2;

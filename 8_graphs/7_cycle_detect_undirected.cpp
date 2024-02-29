@@ -11,7 +11,6 @@ bool detectCycle(int src, vector<int> adj[], unordered_map<int, bool> &visited, 
     {
         if (visited[child] == false)
         {
-            visited[child] = true;
             if (detectCycle(child, adj, visited, src) == true)
                 return true;
         }

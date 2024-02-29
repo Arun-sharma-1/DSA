@@ -12,6 +12,7 @@ public:
         data = ele;
     }
 };
+// we can traverse the tree without using stack and recursion
 void morrisTraversal(Node *root)
 {
     if (root == nullptr)

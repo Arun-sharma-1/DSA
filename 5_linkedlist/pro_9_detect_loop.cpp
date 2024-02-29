@@ -106,11 +106,45 @@ void detectRemoveLoop(Node *head)
     slow = head;
     while (slow->next != fast->next)
     {
-        slow=slow->next;
-        fast=fast->next;
+        slow = slow->next;
+        fast = fast->next;
     }
     slow->next = nullptr;
     return;
+}
+
+// DETECT AND REMOVE LOOP -> LOVE BABBAR
+Node *removeLoop(Node *head)
+{
+    // Write your code here.
+    Node *slow = head;
+    Node *fast = head;
+    while (fast != nullptr && fast->next != nullptr)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+
+        if (slow == fast)
+            break;
+    }
+    if (slow != fast)
+        return head;
+
+    slow = head;
+    while (slow != fast)
+    {
+        slow = slow->next;
+        fast = fast->next;
+    }
+
+    Node *temp = slow;
+
+    while (temp->next != slow)
+    {
+        temp = temp->next;
+    }
+    temp->next = nullptr;
+    return head;
 }
 int main()
 {
@@ -120,7 +154,8 @@ int main()
     insertAtTail(head, 3);
 
     // display(head);
-    cout << detectLoop(head)<<endl;;
+    cout << detectLoop(head) << endl;
+    ;
     detectRemoveLoop(head);
     cout << detectLoop(head);
 

@@ -15,7 +15,6 @@ bool Naive_soln(string &s1, string &s2)
 bool Eff_soln(string &s1, string &s2)
 {
     vector<int>count(26,0);
-    vector<int>count1(26,0);
     if(s1.length()!=s2.length()) return false;
 
     for(int i=0; i<s1.length(); i++)
@@ -28,9 +27,7 @@ bool Eff_soln(string &s1, string &s2)
     {
         if(count[i]!=0) return false;
     }
-    return true;
-
-    
+    return true; 
 }
 int main()
 {

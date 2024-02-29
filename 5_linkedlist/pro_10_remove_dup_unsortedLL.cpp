@@ -35,6 +35,27 @@ public:
         // size=1;
         return;
     }
+    //REMOVE DUPLICATES FROM SORTED LINKED LIST
+    ListNode *deleteDuplicates(ListNode *head)
+    {
+        if (head == nullptr)
+            return head;
+
+        ListNode *curr = head;
+
+        while (curr && curr->next)
+        {
+            if (curr->val == curr->next->val)
+            {
+                curr->next = curr->next->next;
+            }
+            else
+            {
+                curr = curr->next;
+            }
+        }
+        return head;
+    }
     Node *removeDuplicates(Node *head)
     {
         // your code goes here

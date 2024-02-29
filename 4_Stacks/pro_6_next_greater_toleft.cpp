@@ -41,7 +41,7 @@ void nextGreater(int arr[], int n)
 int main()
 {
     int arr[] = {1, 0, 2, 1, 4};
-    // output => -1,-1,3,-1
+    // output => -1,1,-1,2,-1
     int n = sizeof(arr) / sizeof(arr[0]);
     nextGreater(arr, n);
     return 0;

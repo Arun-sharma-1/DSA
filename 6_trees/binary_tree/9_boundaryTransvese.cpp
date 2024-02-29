@@ -12,7 +12,7 @@ public:
         data = ele;
     }
 };
-void leftTransversal(Node *p, vector<int> &ans)
+void leftTraverse(Node *p, vector<int> &ans)
 {
     // we don't have to print the leaf nodes here
     Node *root = p;
@@ -20,11 +20,11 @@ void leftTransversal(Node *p, vector<int> &ans)
         return;
     ans.push_back(root->data);
     if (root->left)
-        leftTransversal(root->left, ans);
+        leftTraverse(root->left, ans);
     else
-        leftTransversal(root->right, ans);
+        leftTraverse(root->right, ans);
 }
-void leafTransversal(Node *p, vector<int> &ans)
+void leafTraverse(Node *p, vector<int> &ans)
 {
     Node *root = p;
     if (root == nullptr)
@@ -35,19 +35,19 @@ void leafTransversal(Node *p, vector<int> &ans)
         ans.push_back(root->data);
         return;
     }
-    leafTransversal(root->left, ans);
-    leafTransversal(root->right, ans);
+    leafTraverse(root->left, ans);
+    leafTraverse(root->right, ans);
 }
-void rightTransversal(Node *root, vector<int> &ans)
+void rightTraverse(Node *root, vector<int> &ans)
 {
 
     if ((root == NULL) )
         return;
     if(root->left == nullptr && root->right == nullptr) return;
     if (root->right)
-        rightTransversal(root->right, ans);
+        rightTraverse(root->right, ans);
     else
-        rightTransversal(root->left, ans);
+        rightTraverse(root->left, ans);
 
     ans.push_back(root->data);
 }
@@ -56,12 +56,12 @@ vector<int> boundary(Node *root)
     vector<int> ans;
     // left
     ans.push_back(root->data);
-    leftTransversal(root->left, ans);
+    leftTraverse(root->left, ans);
     // //leaf node
-    leafTransversal(root->left, ans);
-    leafTransversal(root->right, ans);
+    leafTraverse(root->left, ans);
+    leafTraverse(root->right, ans);
     // //right --> reverse
-    rightTransversal(root->right, ans);
+    rightTraverse(root->right, ans);
     return ans;
 }
 int main()

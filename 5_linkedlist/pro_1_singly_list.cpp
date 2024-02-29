@@ -350,7 +350,7 @@ public:
         if (evenH == nullptr)
             return oddH;
 
-        evenT->next = nullptr;
+        evenT->next = nullptr; // this line is nesaccary
         oddT->next = evenH;
         return oddH;
     }

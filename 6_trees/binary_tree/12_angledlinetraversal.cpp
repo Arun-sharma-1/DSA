@@ -12,12 +12,38 @@ public:
         data = ele;
     }
 };
+//Diagonal Traverse of Binary Tree
+vector<int> diagonal(Node *root)
+{
+    // your code here
+    vector<int> res;
+    if (root == nullptr)
+        return res;
+
+    queue<Node *> q;
+    q.push(root);
+
+    while (!q.empty())
+    {
+        Node *node = q.front();
+        q.pop();
+
+        while (node)
+        {
+            if (node->left)
+                q.push(node->left);
+            res.push_back(node->data);
+            node = node->right;
+        }
+    }
+    return res;
+}
 void boundarytransverse(Node *root, int hdis, map<int, vector<int>> &map)
 {
     if (root == nullptr)
         return;
     map[hdis].push_back(root->data);
-//it is same as vertical traveral it only depends how u insert item in map , so we are here playing just with horizontal dis
+    // it is same as vertical traveral it only depends how u insert item in map , so we are here playing just with horizontal dis
     boundarytransverse(root->left, hdis + 1, map);
     boundarytransverse(root->right, hdis, map);
 }
@@ -39,7 +65,7 @@ int main()
     root->right->right->right = new Node(7);
 
     map<int, vector<int>> map;
-    boundarytransverse(root,0,map);
+    boundarytransverse(root, 0, map);
     for (auto it = map.begin(); it != map.end(); it++)
     {
         for (int i = 0; i < (it->second).size(); i++)

@@ -3,20 +3,20 @@ using namespace std;
 class Queue
 {
     int front;
-    int rare;
-    // rare points to where i want to insert my element 
+    int rear;
+    // rear points to where i want to insert my element 
     int arr[10];
     public:
     int size;
     Queue()
     {
         front=0;
-        rare=0;
+        rear=0;
         size=0;
     }
     void push(int ele)
     {
-        if(rare==10)
+        if(rear==10)
         {
             cout<<"saturation occur "<<endl;
         }
@@ -25,8 +25,8 @@ class Queue
             cout<<"overflow "<<endl;
         }
          
-        arr[rare]=ele;
-        rare++;
+        arr[rear]=ele;
+        rear++;
         size++;
     }
     void pop()

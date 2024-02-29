@@ -26,10 +26,10 @@ void topView(Node *root)
         q.pop();
         Node *frontNode = temp.first;
         int hdis = temp.second;
-        if (treeNode .find(hdis) == treeNode.end())
-        {
-            treeNode[hdis] = frontNode->data;
-        }
+            if (treeNode .find(hdis) == treeNode.end())
+            {
+                treeNode[hdis] = frontNode->data;
+            }
         if (frontNode->left)
             q.push(make_pair(frontNode->left, hdis - 1));
         if (frontNode->right)

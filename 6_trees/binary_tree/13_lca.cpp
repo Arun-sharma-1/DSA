@@ -14,8 +14,10 @@ public:
 };
 Node *lca(Node *root, int n1, int n2)
 {
-    /*return null if left and right both are null , if left is not null return left and if right is not null
-    then return right in any case if both left and right is not null that will be lowest common ancestor*/
+    /*
+    case 1 : If node->data is n1 or node->data is n2 then return node
+    call recursion for every node if data of any node matches return that node that will be the first ancestor
+    */
     if (root == nullptr)
     {
         return nullptr;

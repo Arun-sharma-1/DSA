@@ -2,11 +2,12 @@
 using namespace std;
 
 // IF ALL CHAR IN A AND B ARE DIFFERENT
+//use dp or recursion  to solve this problem
 bool isInterleave(string A, string B, string C)
 {
     int lenA = A.length();
     int lenB = B.length();
-    int lenC = C.length();
+    int lenC = C.length();  
 
     string res = "";
 

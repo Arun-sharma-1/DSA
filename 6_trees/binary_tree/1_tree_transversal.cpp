@@ -100,6 +100,30 @@ void postorderI(Node *root)
         out.pop();
     }
 }
+// using reverse -> easy code in postorder iterative
+vector<int> postorderTraversal(TreeNode *root)
+{
+    vector<int> res;
+    stack<TreeNode *> stk;
+    if (root == nullptr)
+        return res;
+    stk.push(root);
+
+    while (!stk.empty())
+    {
+        auto top = stk.top();
+        stk.pop();
+
+        res.push_back(top->val);
+
+        if (top->left)
+            stk.push(top->left);
+        if (top->right)
+            stk.push(top->right);
+    }
+    reverse(res.begin(), res.end());
+    return res;
+}
 int Level_order(Node *root)
 {
     if (root == nullptr)
@@ -150,7 +174,7 @@ void levelorder(Node *root)
         return;
     queue<Node *> q;
     q.push(root);
-    while (!q.empty())
+    while(!q.empty())
     {
         int count = q.size();
         for (int i = 0; i < count; i++)
@@ -166,7 +190,7 @@ void levelorder(Node *root)
         }
     }
 }
-//working
+// working
 void zigzagTree(Node *root)
 {
     if (root == nullptr)

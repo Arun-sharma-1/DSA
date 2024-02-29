@@ -70,7 +70,7 @@ public:
     // Return the Kth smallest element in the given BST
     int KthSmallestElement(Node *root, int k)
     {
-        // add code here.
+        // add c        ode here.
         if (root == nullptr)
             return ans;
         KthSmallestElement(root->left, k);

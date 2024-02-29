@@ -8,6 +8,7 @@ int removeDuplicates(vector<int> &nums)
         return 0;
 
     int a = 0;
+    //[1,2,3,3,4,4,5 ] ->
     for (int i = 0; i < n; i++)
     {
         if (nums[i] != nums[a])

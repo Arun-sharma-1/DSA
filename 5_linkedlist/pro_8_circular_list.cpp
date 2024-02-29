@@ -17,7 +17,7 @@ void insertAtTail(Node *&head, int ele) // & is needed if we using functions ins
     // empty list
     if (head == nullptr)
     {
-        n->next = n;
+        // n->next = n; ??????? 
         head = n;
         return;
     }
