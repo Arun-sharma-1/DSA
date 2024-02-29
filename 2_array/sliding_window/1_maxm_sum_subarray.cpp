@@ -10,7 +10,7 @@ Kadane algorithm is used to find:
 */
 int sliding(int arr[], int n, int k)
 {
-    int i, j; // i is starting and j is last index 
+    int i, j; // i is starting and j is last index
     i = j = 0;
     int sum = 0;
     int mx = INT_MIN;
@@ -18,7 +18,7 @@ int sliding(int arr[], int n, int k)
     while (j < n)
     {
         sum = sum + arr[j];
-        if (j - i + 1 < k)  // else if only run when if condition is false 
+        if (j - i + 1 < k) // else if only run when if condition is false
             j++;
         else if (j - i + 1 == k)
         {
@@ -34,7 +34,7 @@ int sliding(int arr[], int n, int k)
 int main()
 {
     int n = 4;
-    int arr[n] = {1,-2,3,-2};
+    int arr[n] = {1, -2, 3, -2};
     int k = 3;
     sliding(arr, n, k);
     return 0;

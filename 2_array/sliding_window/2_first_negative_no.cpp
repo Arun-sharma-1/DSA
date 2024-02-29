@@ -13,19 +13,22 @@ vector<int> firstNegative(int arr[], int n, int k)
 
         if (arr[j] < 0)
             l.push_back(arr[j]);
-            
-        if (j - i + 1 < k) j++;
+
+        if (j - i + 1 < k)
+            j++;
 
         else if (j - i + 1 == k) // exact window of size k
         {
             if (l.size() == 0)
             {
-                // cout<<"hrere"<<endl;
+                // cout<<"here"<<endl;
                 v.push_back(0);
             }
             else
             {
                 v.push_back(l.front());
+                // checking that the element we are pushing into the vector is the first element in the sliding window then
+                //  we have to pop it from the list
                 if (arr[i] == l.front())
                     l.pop_front();
             }

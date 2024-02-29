@@ -1,5 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
+//2d arrays are stored as array in memory only the representation is like matrix.we pass column size within function
+//so that compiler can do offset (row*colwidth + col).
+//If we had just Array[][] it would be impossible to find it out and hence impossible to dereference an array element we need.
 void print(int a[][3], int m, int n)
 {
     // changing data

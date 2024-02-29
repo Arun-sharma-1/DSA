@@ -56,30 +56,23 @@ public:
         // return head;
 
 
-        int count = 0;
-        if (head == nullptr)
-            return head;
-        Node *p = head;
-        while (p != nullptr)
+       int count = 0;
+        ListNode *temp = head;
+        
+        while(temp != nullptr)
         {
-            p = p->next;
+            temp = temp->next;
             count++;
         }
-        p = head;
-        if (count == 1)
+        
+        int fromFront = count - n;
+        if(fromFront == 0) return head->next;
+        temp = head;
+        for(int i=0; i<fromFront-1; i++)
         {
-            head = nullptr;
-            return head;
+            temp = temp->next;
         }
-        if (count == n)
-        {
-            return head->next;
-        }
-        for (int i = 0; i < count - n - 1; i++)
-        {
-            p = p->next;
-        }
-        p->next = p->next->next;
+        temp->next =temp->next->next;
         return head;
 
     }

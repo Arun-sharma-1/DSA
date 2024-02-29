@@ -1,30 +1,34 @@
 #include <bits/stdc++.h>
 using namespace std;
-//same as finding minimun element
-int SortedArray(int arr[], int n)
+// same as finding minimun element
+// jo mimimum element ka index h , utni baar array rotated h
+
+int findMin(int arr[], int n)
 {
+    // same as no of time array is sorted
+
     int low = 0;
     int high = n - 1;
-    if(arr[high] >= arr[low]) return 0;
     while (high >= low)
     {
         int mid = low + (high - low) / 2;
+
         int next = (mid + 1) % n;
         int prev = (mid - 1 + n) % n;
 
-        if (arr[mid] <= arr[next] && arr[prev] >= arr[mid])
-        {   
-            return arr[mid]; // means it is the smallest so it should come low and index of this value is answer
-        }
-        //THESE BOTH CONDITION will throw to unordered part of array coz in unordered we will get the smallest 
-        if (arr[mid] >= arr[low])
+        if (arr[mid] <= arr[next] && arr[mid] <= arr[prev])
+            return arr[mid];
+
+        // unsorted array m ans milega
+        // we will move to unordered part by comparing mid with low and high index , minm ele will be present in unordrered side
+        else if (arr[high] >= arr[mid])
+            high = mid - 1;
+        else if (arr[low] <= arr[mid])
             low = mid + 1;
-        else if (arr[mid] <= arr[high])
-            high  = mid - 1;
     }
     return -1;
 }
-int main()
+s int main()
 {
     int arr[] = {11, 12, 15, 18, 2, 5, 6, 8};
     int n = sizeof(arr) / sizeof(arr[0]);

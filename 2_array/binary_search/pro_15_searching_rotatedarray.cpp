@@ -1,33 +1,41 @@
 #include <bits/stdc++.h>
 using namespace std;
-int search(int arr[], int n, int ele)
-{
-    // array is rotated sorted  = > element will be present on left side of mid or either right side of mid ,
-    // we will confirm by this comparing with the mid with corner element
-    int low = 0;
-    int high = n - 1;
 
-    while (high >= low)
+// array is rotated sorted  = > element will be present on left side of mid or either right side of mid ,
+// we will confirm by this comparing with the mid with corner element
+
+// accepted on gfg
+int search(int arr[], int start, int end, int ele)
+{
+    // l: The starting index
+    // h: The ending index, you have to search the key in this range
+    while (end >= start)
     {
-        int mid = low + (high - low) / 2;
+        int mid = start + (end - start) / 2;
 
         if (arr[mid] == ele)
             return mid;
-        if (arr[low] < arr[mid])
+
+        // 2 case will be there
+        // 1.either left half is sorted
+        // 2.right half will be sorted
+
+        else if (arr[mid] >= arr[start])
         {
-            // left half is sorted
-            if (ele >= arr[low] && arr[mid] > ele)
-                high = mid - 1;
+            // left half sorted mil gya
+
+            if (ele >= arr[start] && arr[mid] >= ele)
+                end = mid - 1;
             else
-                low = mid + 1;
+                start = mid + 1;
         }
         else
         {
-            // right half sorted
-            if (ele <= arr[high] && ele > arr[mid] )
-                low = mid + 1;
+            // right half sorted h
+            if (arr[end] >= ele && arr[mid] <= ele)
+                start = mid + 1;
             else
-                high = mid - 1;
+                end = mid - 1;
         }
     }
     return -1;
